@@ -25,8 +25,7 @@ public class FlightOrder extends Order {
         return flights;
     }
 
-    @Deprecated
-    private boolean isOrderValid(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
+    public static boolean isOrderValid(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
         boolean valid = true;
         valid = valid && !noFlyList.contains(customer.getName());
         valid = valid && passengerNames.stream().noneMatch(passenger -> noFlyList.contains(passenger));

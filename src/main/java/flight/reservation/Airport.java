@@ -5,7 +5,7 @@ import flight.reservation.flight.Flight;
 import java.util.List;
 
 public class Airport {
-    private final String[] ALL_AIRCRAFT_MODELS = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"}
+    private final String[] ALL_AIRCRAFT_MODELS = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"};
 
     private final String name;
     private final String code;
