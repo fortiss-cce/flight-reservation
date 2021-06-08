@@ -15,6 +15,7 @@ public class ScheduledFlight extends Flight {
 
     private final List<Passenger> passengers;
     private final Date departureTime;
+    @Deprecated
     private double currentPrice = 100;
 
     public ScheduledFlight(int number, Airport departure, Airport arrival, Aircraft aircraft, Date departureTime) {
