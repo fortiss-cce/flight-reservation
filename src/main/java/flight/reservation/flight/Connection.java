@@ -1,9 +1,7 @@
 package flight.reservation.flight;
 
 import flight.reservation.Airport;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.AircraftModel;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -13,13 +11,13 @@ public class Connection {
     private int number;
     private Airport departure;
     private Airport arrival;
-    protected Object aircraft;
+    protected AircraftModel aircraftModel;
 
-    public Connection(int number, Airport departure, Airport arrival, Object aircraft) throws IllegalArgumentException {
+    public Connection(int number, Airport departure, Airport arrival, AircraftModel aircraftModel) throws IllegalArgumentException {
         this.number = number;
         this.departure = departure;
         this.arrival = arrival;
-        this.aircraft = aircraft;
+        this.aircraftModel = aircraftModel;
         checkValidity();
     }
 
@@ -30,23 +28,11 @@ public class Connection {
     }
 
     private boolean isAircraftValid(Airport airport) {
-        return Arrays.stream(airport.getAllowedAircrafts()).anyMatch(x -> {
-            String model;
-            if (this.aircraft instanceof PassengerPlane) {
-                model = ((PassengerPlane) this.aircraft).model;
-            } else if (this.aircraft instanceof Helicopter) {
-                model = ((Helicopter) this.aircraft).getModel();
-            } else if (this.aircraft instanceof PassengerDrone) {
-                model = "HypaHype";
-            } else {
-                throw new IllegalArgumentException(String.format("Aircraft is not recognized"));
-            }
-            return x.equals(model);
-        });
+        return Arrays.stream(airport.getAllowedAircraftModels()).anyMatch(x -> x.equals(aircraftModel));
     }
 
-    public Object getAircraft() {
-        return aircraft;
+    public AircraftModel getAircraftModel() {
+        return aircraftModel;
     }
 
     public int getNumber() {
@@ -66,17 +52,17 @@ public class Connection {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Connection that = (Connection) o;
-        return number == that.number && departure.equals(that.departure) && arrival.equals(that.arrival) && aircraft.equals(that.aircraft);
+        return number == that.number && departure.equals(that.departure) && arrival.equals(that.arrival) && aircraftModel.equals(that.aircraftModel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, departure, arrival, aircraft);
+        return Objects.hash(number, departure, arrival, aircraftModel);
     }
 
     @Override
     public String toString() {
-        return aircraft.toString() + "-" + number + "-" + departure.getCode() + "/" + arrival.getCode();
+        return aircraftModel.toString() + "-" + number + "-" + departure.getCode() + "/" + arrival.getCode();
     }
 
 }

@@ -1,9 +1,7 @@
 import flight.reservation.Airport;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.Connection;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.AircraftModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,22 +18,13 @@ public class Runner {
             new Airport("Chengdu Shuangliu International Airport", "CTU", "Shuangliu-Wuhou, Chengdu, Sichuan")
     );
 
-    static List<Object> aircrafts = Arrays.asList(
-            new PassengerPlane("A380"),
-            new PassengerPlane("A350"),
-            new PassengerPlane("Embraer 190"),
-            new PassengerPlane("Antonov AN2"),
-            new Helicopter("H1"),
-            new PassengerDrone("HypaHype")
-    );
-
     static List<Connection> flights = Arrays.asList(
-            new Connection(1, airports.get(0), airports.get(1), aircrafts.get(0)),
-            new Connection(2, airports.get(1), airports.get(2), aircrafts.get(1)),
-            new Connection(3, airports.get(2), airports.get(4), aircrafts.get(2)),
-            new Connection(4, airports.get(3), airports.get(2), aircrafts.get(3)),
-            new Connection(5, airports.get(4), airports.get(2), aircrafts.get(4)),
-            new Connection(6, airports.get(5), airports.get(7), aircrafts.get(5))
+            new Connection(1, airports.get(0), airports.get(1), AircraftModel.A380),
+            new Connection(2, airports.get(1), airports.get(2), AircraftModel.A350),
+            new Connection(3, airports.get(2), airports.get(4), AircraftModel.Embraer190),
+            new Connection(4, airports.get(3), airports.get(2), AircraftModel.AntonovAN2),
+            new Connection(5, airports.get(4), airports.get(2), AircraftModel.H1),
+            new Connection(6, airports.get(5), airports.get(7), AircraftModel.HypaHype)
     );
 
     static Schedule schedule;

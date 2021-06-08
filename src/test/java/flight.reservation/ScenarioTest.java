@@ -5,8 +5,7 @@ import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.order.FlightOrder;
 import flight.reservation.payment.CreditCard;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.AircraftModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -51,13 +50,16 @@ public class ScenarioTest {
             @BeforeEach
             public void initFlights() {
                 startAirport = new Airport("John F. Kennedy International Airport", "JFK", "Queens, New York, New York");
-                destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse", new String[]{"A380", "A350"});
+                destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse", new AircraftModel[]{
+                        AircraftModel.A380,
+                        AircraftModel.A350
+                });
             }
 
             @Test
             @DisplayName("then the flight should not be available")
             void thenFlightNotAvailable() {
-                assertThrows(IllegalArgumentException.class, () -> new Connection(1, startAirport, destinationAirport, new Helicopter("H1")));
+                assertThrows(IllegalArgumentException.class, () -> new Connection(1, startAirport, destinationAirport, AircraftModel.H1));
             }
 
         }
@@ -70,7 +72,7 @@ public class ScenarioTest {
             public void initFlights() {
                 startAirport = new Airport("John F. Kennedy International Airport", "JFK", "Queens, New York, New York");
                 destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
-                flight = new Connection(1, startAirport, destinationAirport, new Helicopter("H1"));
+                flight = new Connection(1, startAirport, destinationAirport, AircraftModel.H1);
                 Date departure = TestUtil.addDays(Date.from(Instant.now()), 3);
                 schedule.scheduleFlight(flight, departure);
             }
@@ -96,7 +98,7 @@ public class ScenarioTest {
                     ScheduledFlight scheduledFlight = schedule.searchScheduledFlight(flight.getNumber());
                     assertThrows(IllegalStateException.class, () -> customer.createOrder(Arrays.asList("Amanda", "Max"), Arrays.asList(scheduledFlight), 180));
                     assertEquals(3, scheduledFlight.getPassengers().size());
-                    assertEquals(4, scheduledFlight.getCapacity());
+                    assertEquals(4, scheduledFlight.getConnection().getAircraftModel().getMaxPassengerCapacity());
                     assertEquals(1, scheduledFlight.getAvailableCapacity());
                     assertTrue(scheduledFlight.getPassengers().stream().noneMatch(passenger -> passenger.getName().equals("Max")));
                     assertTrue(scheduledFlight.getPassengers().stream().noneMatch(passenger -> passenger.getName().equals("Amanda")));
@@ -113,7 +115,7 @@ public class ScenarioTest {
                     FlightOrder order = customer.createOrder(Arrays.asList("Amanda", "Max"), Arrays.asList(scheduledFlight), 180);
 
                     assertEquals(2, scheduledFlight.getPassengers().size());
-                    assertEquals(4, scheduledFlight.getCapacity());
+                    assertEquals(4, scheduledFlight.getConnection().getAircraftModel().getMaxPassengerCapacity());
                     assertEquals(2, scheduledFlight.getAvailableCapacity());
                     assertTrue(scheduledFlight.getPassengers().stream().anyMatch(passenger -> passenger.getName().equals("Max")));
                     assertTrue(scheduledFlight.getPassengers().stream().anyMatch(passenger -> passenger.getName().equals("Amanda")));
@@ -138,7 +140,7 @@ public class ScenarioTest {
             // flights
             startAirport = new Airport("Berlin Airport", "BER", "Berlin, Berlin");
             destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
-            flight = new Connection(1, startAirport, destinationAirport, new PassengerPlane("A380"));
+            flight = new Connection(1, startAirport, destinationAirport, AircraftModel.A380);
             Date departure = TestUtil.addDays(Date.from(Instant.now()), 3);
             schedule.scheduleFlight(flight, departure);
             // customer
@@ -207,7 +209,7 @@ public class ScenarioTest {
                 assertEquals(900, creditCard.getAmount());
                 assertEquals(1, scheduledFlight.getPassengers().size());
                 assertEquals("Max", scheduledFlight.getPassengers().get(0).getName());
-                assertEquals(500, scheduledFlight.getCapacity());
+                assertEquals(500, scheduledFlight.getConnection().getAircraftModel().getMaxPassengerCapacity());
                 assertEquals(499, scheduledFlight.getAvailableCapacity());
 
             }

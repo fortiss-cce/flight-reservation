@@ -1,6 +1,7 @@
 package flight.reservation;
 
 import flight.reservation.flight.Connection;
+import flight.reservation.plane.AircraftModel;
 
 import java.util.List;
 
@@ -10,21 +11,27 @@ public class Airport {
     private final String code;
     private final String location;
     private List<Connection> flights;
-    private String[] allowedAircrafts;
+    private AircraftModel[] allowedAircraftModels;
 
     public Airport(String name, String code, String location) {
         this.name = name;
         this.code = code;
         this.location = location;
-        // TODO: Should also use plane type
-        this.allowedAircrafts = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"};
+        this.allowedAircraftModels = new AircraftModel[]{
+                AircraftModel.A380,
+                AircraftModel.A350,
+                AircraftModel.Embraer190,
+                AircraftModel.AntonovAN2,
+                AircraftModel.H1,
+                AircraftModel.H2,
+                AircraftModel.HypaHype};
     }
 
-    public Airport(String name, String code, String location, String[] allowedAircrafts) {
+    public Airport(String name, String code, String location, AircraftModel[] allowedAircraftModels) {
         this.name = name;
         this.code = code;
         this.location = location;
-        this.allowedAircrafts = allowedAircrafts;
+        this.allowedAircraftModels = allowedAircraftModels;
     }
 
     public String getName() {
@@ -47,7 +54,7 @@ public class Airport {
         this.flights = flights;
     }
 
-    public String[] getAllowedAircrafts() {
-        return allowedAircrafts;
+    public AircraftModel[] getAllowedAircraftModels() {
+        return allowedAircraftModels;
     }
 }

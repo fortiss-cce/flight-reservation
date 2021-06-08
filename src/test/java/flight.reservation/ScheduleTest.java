@@ -3,9 +3,7 @@ package flight.reservation;
 import flight.reservation.flight.Connection;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.AircraftModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -55,7 +53,7 @@ public class ScheduleTest {
         @Test
         @DisplayName("then removing a connection should still yield an empty list")
         void thenScheduleShouldYieldEmpty() {
-            schedule.removeAllScheduledFlights(new Connection(1, new Airport("a", "a", "a"), new Airport("b", "b", "b"), new PassengerPlane("A380")));
+            schedule.removeAllScheduledFlights(new Connection(1, new Airport("a", "a", "a"), new Airport("b", "b", "b"), AircraftModel.A380));
             assertEquals(0, schedule.getScheduledFlights().size());
         }
 
@@ -71,8 +69,7 @@ public class ScheduleTest {
                 Airport startAirport = new Airport("Berlin Airport", "BER", "Berlin, Berlin");
                 Airport destAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
 
-                PassengerPlane aircraft = new PassengerPlane("A380");
-                connection = new Connection(1, startAirport, destAirport, aircraft);
+                connection = new Connection(1, startAirport, destAirport, AircraftModel.A380);
                 departure = TestUtil.addDays(Date.from(Instant.now()), 3);
                 schedule.scheduleFlight(connection, departure);
             }
@@ -123,12 +120,12 @@ public class ScheduleTest {
         );
 
         List<Connection> connections = Arrays.asList(
-                new Connection(1, airports.get(0), airports.get(1), new PassengerPlane("A350")),
-                new Connection(2, airports.get(1), airports.get(2), new PassengerPlane("A380")),
-                new Connection(3, airports.get(2), airports.get(4), new PassengerPlane("Embraer 190")),
-                new Connection(4, airports.get(3), airports.get(2), new PassengerPlane("Antonov AN2")),
-                new Connection(5, airports.get(4), airports.get(2), new Helicopter("H1")),
-                new Connection(6, airports.get(5), airports.get(7), new PassengerDrone("HypaHype"))
+                new Connection(1, airports.get(0), airports.get(1), AircraftModel.A350),
+                new Connection(2, airports.get(1), airports.get(2), AircraftModel.A380),
+                new Connection(3, airports.get(2), airports.get(4), AircraftModel.Embraer190),
+                new Connection(4, airports.get(3), airports.get(2), AircraftModel.AntonovAN2),
+                new Connection(5, airports.get(4), airports.get(2), AircraftModel.H1),
+                new Connection(6, airports.get(5), airports.get(7), AircraftModel.HypaHype)
         );
 
         @BeforeEach
