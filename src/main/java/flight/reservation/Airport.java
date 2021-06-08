@@ -3,6 +3,7 @@ package flight.reservation;
 import flight.reservation.flight.Connection;
 import flight.reservation.plane.AircraftModel;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Airport {
@@ -52,6 +53,10 @@ public class Airport {
 
     public void setFlights(List<Connection> flights) {
         this.flights = flights;
+    }
+
+    public boolean isAircraftValid(AircraftModel model) {
+        return Arrays.asList(allowedAircraftModels).contains(model);
     }
 
     public AircraftModel[] getAllowedAircraftModels() {

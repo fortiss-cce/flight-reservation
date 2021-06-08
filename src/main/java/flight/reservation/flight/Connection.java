@@ -8,10 +8,10 @@ import java.util.Objects;
 
 public class Connection {
 
-    private int number;
-    private Airport departure;
-    private Airport arrival;
-    protected AircraftModel aircraftModel;
+    private final int number;
+    private final Airport departure;
+    private final Airport arrival;
+    private final AircraftModel aircraftModel;
 
     public Connection(int number, Airport departure, Airport arrival, AircraftModel aircraftModel) throws IllegalArgumentException {
         this.number = number;
@@ -22,13 +22,9 @@ public class Connection {
     }
 
     private void checkValidity() throws IllegalArgumentException {
-        if (!isAircraftValid(departure) || !isAircraftValid(arrival)) {
+        if (!departure.isAircraftValid(aircraftModel) || !arrival.isAircraftValid(aircraftModel)) {
             throw new IllegalArgumentException("Selected aircraft is not valid for the selected route.");
         }
-    }
-
-    private boolean isAircraftValid(Airport airport) {
-        return Arrays.stream(airport.getAllowedAircraftModels()).anyMatch(x -> x.equals(aircraftModel));
     }
 
     public AircraftModel getAircraftModel() {
