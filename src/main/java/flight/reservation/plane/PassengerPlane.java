@@ -2,41 +2,52 @@ package flight.reservation.plane;
 
 public class PassengerPlane extends Aircraft {
 
-    public int crewCapacity;
+    private int crewCapacity;
 
-    private static int getPassengerCapacity(String model) {
-        switch (model) {
-            case "A380":
-                return 500;
-            case "A350":
-                return 320;
-            case "Embraer 190":
-                return 25;
-            case "Antonov AN2":
-                return 15;
-            default:
-                throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
+    public enum PlaneModel {
+        A350("A350", 320, 40),
+        A380("A380", 500, 42),
+        ANTONOV_AN2("Antonov AN2", 15, 3),
+        EMBRAER_190("Embraer 190", 25, 5);
+
+        private String displayName;
+        private int passengetCapacity;
+        private int crewCapacity;
+
+
+        PlaneModel(String displayName, int passengerCapacity, int crewCapacity) {
+            this.displayName = displayName;
+            this.passengetCapacity = passengerCapacity;
+            this.crewCapacity = crewCapacity;
         }
+
+        int getPassengerCapacity() {
+            return passengetCapacity;
+        }
+
+        int getCrewCapacity() {
+            return crewCapacity;
+        }
+
+        public static PlaneModel getEnum(String modelName) {
+            String sanitizedString = modelName.toUpperCase().replaceAll("\\s", "_");
+            return PlaneModel.valueOf(sanitizedString);
+        }
+
+        @Override public String toString() { return displayName; }
+    }
+
+    public PassengerPlane(PlaneModel model) {
+        super(model.displayName, model.getPassengerCapacity());
+        this.crewCapacity = model.getCrewCapacity();
     }
 
     public PassengerPlane(String model) {
-        super(model, getPassengerCapacity(model));
-        switch (model) {
-            case "A380":
-                crewCapacity = 42;
-                break;
-            case "A350":
-                crewCapacity = 40;
-                break;
-            case "Embraer 190":
-                crewCapacity = 5;
-                break;
-            case "Antonov AN2":
-                crewCapacity = 3;
-                break;
-            default:
-                throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
-        }
+        this(PlaneModel.getEnum(model));
+    }
+
+    public int getCrewCapacity() {
+        return crewCapacity;
     }
 
 }
