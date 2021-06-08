@@ -30,19 +30,7 @@ public class Flight {
     }
 
     private boolean isAircraftValid(Airport airport) {
-        return Arrays.stream(airport.getAllowedAircraft()).noneMatch(x -> {
-            String model;
-            if (this.aircraft instanceof PassengerPlane) {
-                model = ((PassengerPlane) this.aircraft).getModel();
-            } else if (this.aircraft instanceof Helicopter) {
-                model = ((Helicopter) this.aircraft).getModel();
-            } else if (this.aircraft instanceof PassengerDrone) {
-                model = "HypaHype";
-            } else {
-                throw new IllegalArgumentException("Aircraft is not recognized");
-            }
-            return x.equals(model);
-        });
+        return Arrays.stream(airport.getAllowedAircraft()).noneMatch(x -> x.equals(this.aircraft.getModel()));
     }
 
     public Aircraft getAircraft() {
