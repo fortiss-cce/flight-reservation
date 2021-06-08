@@ -1,6 +1,7 @@
 package flight.reservation.order;
 
 import flight.reservation.Customer;
+import flight.reservation.Passenger;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.payment.CreditCard;
 import flight.reservation.payment.Paypal;
@@ -8,13 +9,25 @@ import flight.reservation.payment.Paypal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlightOrder extends Order {
     private final List<ScheduledFlight> flights;
     static List<String> noFlyList = Arrays.asList("Peter", "Johannes");
 
-    public FlightOrder(List<ScheduledFlight> flights) {
+    public FlightOrder(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights, double price) {
+        if(!isOrderValid(customer, passengerNames, flights)) {
+            throw new IllegalStateException("Order is not valid");
+        }
         this.flights = flights;
+        setCustomer(customer);
+        setPrice(price);
+        List<Passenger> passengers = passengerNames
+                .stream()
+                .map(Passenger::new)
+                .collect(Collectors.toList());
+        setPassengers(passengers);
+        getScheduledFlights().forEach(scheduledFlight -> scheduledFlight.addPassengers(passengers));
     }
 
     public static List<String> getNoFlyList() {
@@ -25,7 +38,7 @@ public class FlightOrder extends Order {
         return flights;
     }
 
-    private boolean isOrderValid(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
+    public static boolean isOrderValid(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
         boolean valid = true;
         valid = valid && !noFlyList.contains(customer.getName());
         valid = valid && passengerNames.stream().noneMatch(passenger -> noFlyList.contains(passenger));
