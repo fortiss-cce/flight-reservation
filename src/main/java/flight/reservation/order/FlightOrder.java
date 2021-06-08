@@ -1,13 +1,13 @@
 package flight.reservation.order;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 import flight.reservation.Customer;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.payment.CreditCard;
 import flight.reservation.payment.Paypal;
-
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 public class FlightOrder extends Order {
     private final List<ScheduledFlight> flights;
@@ -30,12 +30,7 @@ public class FlightOrder extends Order {
         valid = valid && !noFlyList.contains(customer.getName());
         valid = valid && passengerNames.stream().noneMatch(passenger -> noFlyList.contains(passenger));
         valid = valid && flights.stream().allMatch(scheduledFlight -> {
-            try {
-                return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-                return false;
-            }
+            return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
         });
         return valid;
     }

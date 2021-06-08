@@ -1,12 +1,12 @@
 package flight.reservation;
 
-import flight.reservation.flight.ScheduledFlight;
-import flight.reservation.order.FlightOrder;
-import flight.reservation.order.Order;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import flight.reservation.flight.ScheduledFlight;
+import flight.reservation.order.FlightOrder;
+import flight.reservation.order.Order;
 
 public class Customer {
 
@@ -42,12 +42,7 @@ public class Customer {
         valid = valid && !FlightOrder.getNoFlyList().contains(this.getName());
         valid = valid && passengerNames.stream().noneMatch(passenger -> FlightOrder.getNoFlyList().contains(passenger));
         valid = valid && flights.stream().allMatch(scheduledFlight -> {
-            try {
-                return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-                return false;
-            }
+            return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
         });
         return valid;
     }
