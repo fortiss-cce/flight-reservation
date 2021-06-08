@@ -7,8 +7,7 @@ import java.util.List;
 public class Schedule {
 
     private List<ScheduledFlight> scheduledFlights;
-
-
+    
     public Schedule() {
         scheduledFlights = new ArrayList<>();
     }
