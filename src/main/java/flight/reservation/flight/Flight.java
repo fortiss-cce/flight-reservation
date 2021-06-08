@@ -1,6 +1,7 @@
 package flight.reservation.flight;
 
 import flight.reservation.Airport;
+import flight.reservation.plane.Aircraft;
 import flight.reservation.plane.Helicopter;
 import flight.reservation.plane.PassengerDrone;
 import flight.reservation.plane.PassengerPlane;
@@ -12,9 +13,9 @@ public class Flight {
     private final int number;
     private final Airport departure;
     private final Airport arrival;
-    protected final Object aircraft;
+    protected final Aircraft aircraft;
 
-    public Flight(int number, Airport departure, Airport arrival, Object aircraft) throws IllegalArgumentException {
+    public Flight(int number, Airport departure, Airport arrival, Aircraft aircraft) throws IllegalArgumentException {
         this.number = number;
         this.departure = departure;
         this.arrival = arrival;
@@ -44,7 +45,7 @@ public class Flight {
         });
     }
 
-    public Object getAircraft() {
+    public Aircraft getAircraft() {
         return aircraft;
     }
 
