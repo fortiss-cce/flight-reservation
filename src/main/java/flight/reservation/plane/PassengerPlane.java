@@ -1,28 +1,37 @@
 package flight.reservation.plane;
 
-public class PassengerPlane {
+public class PassengerPlane extends Aircraft {
 
-    public final String model;
-    public int passengerCapacity;
     public int crewCapacity;
 
-    public PassengerPlane(String model) {
-        this.model = model;
+    private static int getPassengerCapacity(String model) {
         switch (model) {
             case "A380":
-                passengerCapacity = 500;
+                return 500;
+            case "A350":
+                return 320;
+            case "Embraer 190":
+                return 25;
+            case "Antonov AN2":
+                return 15;
+            default:
+                throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
+        }
+    }
+
+    public PassengerPlane(String model) {
+        super(model, getPassengerCapacity(model));
+        switch (model) {
+            case "A380":
                 crewCapacity = 42;
                 break;
             case "A350":
-                passengerCapacity = 320;
                 crewCapacity = 40;
                 break;
             case "Embraer 190":
-                passengerCapacity = 25;
                 crewCapacity = 5;
                 break;
             case "Antonov AN2":
-                passengerCapacity = 15;
                 crewCapacity = 3;
                 break;
             default:

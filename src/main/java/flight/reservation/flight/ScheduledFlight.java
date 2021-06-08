@@ -52,7 +52,7 @@ public class ScheduledFlight extends Flight {
 
     public int getCapacity() throws NoSuchFieldException {
         if (this.aircraft instanceof PassengerPlane) {
-            return ((PassengerPlane) this.aircraft).passengerCapacity;
+            return ((PassengerPlane) this.aircraft).getPassengerCapacity();
         }
         if (this.aircraft instanceof Helicopter) {
             return ((Helicopter) this.aircraft).getPassengerCapacity();
