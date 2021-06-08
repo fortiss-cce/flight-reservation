@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * Dummy credit card class.
  */
+// TODO: PaymentMethod base class, common functionality for validation etc.
 public class CreditCard {
     private double amount;
     private String number;

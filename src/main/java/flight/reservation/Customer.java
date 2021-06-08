@@ -20,6 +20,7 @@ public class Customer {
         this.orders = new ArrayList<>();
     }
 
+    // TODO: Move to more sensible place
     public FlightOrder createOrder(List<String> passengerNames, List<ScheduledFlight> flights, double price) {
         if (!isOrderValid(passengerNames, flights)) {
             throw new IllegalStateException("Order is not valid");

@@ -6,15 +6,16 @@ import flight.reservation.plane.PassengerDrone;
 import flight.reservation.plane.PassengerPlane;
 
 import java.util.Arrays;
+import java.util.Objects;
 
-public class Flight {
+public class Connection {
 
     private int number;
     private Airport departure;
     private Airport arrival;
     protected Object aircraft;
 
-    public Flight(int number, Airport departure, Airport arrival, Object aircraft) throws IllegalArgumentException {
+    public Connection(int number, Airport departure, Airport arrival, Object aircraft) throws IllegalArgumentException {
         this.number = number;
         this.departure = departure;
         this.arrival = arrival;
@@ -58,6 +59,19 @@ public class Flight {
 
     public Airport getArrival() {
         return arrival;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Connection that = (Connection) o;
+        return number == that.number && departure.equals(that.departure) && arrival.equals(that.arrival) && aircraft.equals(that.aircraft);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, departure, arrival, aircraft);
     }
 
     @Override

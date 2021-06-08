@@ -3,6 +3,7 @@ package flight.reservation.payment;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: PaymentMethod base class, common functionality for validation etc.
 public class Paypal {
     public static final Map<String, String> DATA_BASE = new HashMap<>();
 

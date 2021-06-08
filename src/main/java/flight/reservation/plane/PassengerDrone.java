@@ -1,5 +1,6 @@
 package flight.reservation.plane;
 
+// TODO: Common base class?
 public class PassengerDrone {
     private final String model;
 
