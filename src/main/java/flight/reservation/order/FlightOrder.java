@@ -3,29 +3,45 @@ package flight.reservation.order;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import flight.reservation.Customer;
+import flight.reservation.Passenger;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.payment.CreditCard;
 import flight.reservation.payment.Paypal;
 
 public class FlightOrder extends Order {
     private final List<ScheduledFlight> flights;
-    static List<String> noFlyList = Arrays.asList("Peter", "Johannes");
+    private static List<String> noFlyList = Arrays.asList("Peter", "Johannes");
 
     public FlightOrder(List<ScheduledFlight> flights) {
         this.flights = flights;
-    }
-
-    public static List<String> getNoFlyList() {
-        return noFlyList;
     }
 
     public List<ScheduledFlight> getScheduledFlights() {
         return flights;
     }
 
-    private boolean isOrderValid(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
+    public static FlightOrder createOrder(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights, double price){
+        if (!FlightOrder.isOrderValid(customer, passengerNames, flights)) {
+            throw new IllegalStateException("Order is not valid");
+        }
+        FlightOrder order = new FlightOrder(flights);
+        order.setCustomer(customer);
+        order.setPrice(price);
+        List<Passenger> passengers = passengerNames
+                .stream()
+                .map(Passenger::new)
+                .collect(Collectors.toList());
+        order.setPassengers(passengers);
+        order.getScheduledFlights().forEach(scheduledFlight -> scheduledFlight.addPassengers(passengers));
+        customer.addOrder(order);
+        return order;
+
+    }
+
+    public static boolean isOrderValid(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
         boolean valid = true;
         valid = valid && !noFlyList.contains(customer.getName());
         valid = valid && passengerNames.stream().noneMatch(passenger -> noFlyList.contains(passenger));
