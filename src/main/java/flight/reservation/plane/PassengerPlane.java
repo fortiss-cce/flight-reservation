@@ -2,7 +2,7 @@ package flight.reservation.plane;
 
 public class PassengerPlane {
 
-    public String model;
+    public final String model;
     public int passengerCapacity;
     public int crewCapacity;
 

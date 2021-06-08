@@ -9,10 +9,10 @@ import java.util.Arrays;
 
 public class Flight {
 
-    private int number;
-    private Airport departure;
-    private Airport arrival;
-    protected Object aircraft;
+    private final int number;
+    private final Airport departure;
+    private final Airport arrival;
+    protected final Object aircraft;
 
     public Flight(int number, Airport departure, Airport arrival, Object aircraft) throws IllegalArgumentException {
         this.number = number;
@@ -23,13 +23,13 @@ public class Flight {
     }
 
     private void checkValidity() throws IllegalArgumentException {
-        if (!isAircraftValid(departure) || !isAircraftValid(arrival)) {
+        if (isAircraftValid(departure) || isAircraftValid(arrival)) {
             throw new IllegalArgumentException("Selected aircraft is not valid for the selected route.");
         }
     }
 
     private boolean isAircraftValid(Airport airport) {
-        return Arrays.stream(airport.getAllowedAircraft()).anyMatch(x -> {
+        return Arrays.stream(airport.getAllowedAircraft()).noneMatch(x -> {
             String model;
             if (this.aircraft instanceof PassengerPlane) {
                 model = ((PassengerPlane) this.aircraft).model;
@@ -38,7 +38,7 @@ public class Flight {
             } else if (this.aircraft instanceof PassengerDrone) {
                 model = "HypaHype";
             } else {
-                throw new IllegalArgumentException(String.format("Aircraft is not recognized"));
+                throw new IllegalArgumentException("Aircraft is not recognized");
             }
             return x.equals(model);
         });

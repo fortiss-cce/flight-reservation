@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Runner {
-    static List<Airport> airports = Arrays.asList(
+    static final List<Airport> airports = Arrays.asList(
             new Airport("Berlin Airport", "BER", "Berlin, Berlin"),
             new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse"),
             new Airport("Madrid Barajas Airport", "MAD", "Barajas, Madrid"),
@@ -20,7 +20,7 @@ public class Runner {
             new Airport("Chengdu Shuangliu International Airport", "CTU", "Shuangliu-Wuhou, Chengdu, Sichuan")
     );
 
-    static List<Object> aircrafts = Arrays.asList(
+    static final List<Object> aircrafts = Arrays.asList(
             new PassengerPlane("A380"),
             new PassengerPlane("A350"),
             new PassengerPlane("Embraer 190"),

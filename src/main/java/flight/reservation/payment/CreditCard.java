@@ -7,9 +7,9 @@ import java.util.Date;
  */
 public class CreditCard {
     private double amount;
-    private String number;
-    private Date date;
-    private String cvv;
+    private final String number;
+    private final Date date;
+    private final String cvv;
     private boolean valid;
 
     public CreditCard(String number, Date date, String cvv) {

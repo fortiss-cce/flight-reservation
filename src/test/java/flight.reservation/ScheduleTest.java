@@ -111,7 +111,7 @@ public class ScheduleTest {
     @DisplayName("Given an existing Schedule")
     class GivenAnExistingSchedule {
 
-        List<Airport> airports = Arrays.asList(
+        final List<Airport> airports = Arrays.asList(
                 new Airport("Berlin Airport", "BER", "Berlin, Berlin"),
                 new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse"),
                 new Airport("Madrid Barajas Airport", "MAD", "Barajas, Madrid"),
@@ -122,7 +122,7 @@ public class ScheduleTest {
                 new Airport("Chengdu Shuangliu International Airport", "CTU", "Shuangliu-Wuhou, Chengdu, Sichuan")
         );
 
-        List<Flight> flights = Arrays.asList(
+        final List<Flight> flights = Arrays.asList(
                 new Flight(1, airports.get(0), airports.get(1), new PassengerPlane("A350")),
                 new Flight(2, airports.get(1), airports.get(2), new PassengerPlane("A380")),
                 new Flight(3, airports.get(2), airports.get(4), new PassengerPlane("Embraer 190")),

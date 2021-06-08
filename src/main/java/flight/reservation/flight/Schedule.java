@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Schedule {
 
-    private List<ScheduledFlight> scheduledFlights;
+    private final List<ScheduledFlight> scheduledFlights;
 
 
     public Schedule() {

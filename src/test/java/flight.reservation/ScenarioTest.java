@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -94,7 +95,7 @@ public class ScenarioTest {
                 @DisplayName("then the booking should be stopped and the payment should not proceed and the capacity should be unchanged")
                 void thenTheBookingShouldBeStopped() throws NoSuchFieldException {
                     ScheduledFlight scheduledFlight = schedule.searchScheduledFlight(flight.getNumber());
-                    assertThrows(IllegalStateException.class, () -> customer.createOrder(Arrays.asList("Amanda", "Max"), Arrays.asList(scheduledFlight), 180));
+                    assertThrows(IllegalStateException.class, () -> customer.createOrder(Arrays.asList("Amanda", "Max"), Collections.singletonList(scheduledFlight), 180));
                     assertEquals(3, scheduledFlight.getPassengers().size());
                     assertEquals(4, scheduledFlight.getCapacity());
                     assertEquals(1, scheduledFlight.getAvailableCapacity());
@@ -110,7 +111,7 @@ public class ScenarioTest {
                 @DisplayName("then the booking should succeed")
                 void thenTheBookingShouldSucceed() throws NoSuchFieldException {
                     ScheduledFlight scheduledFlight = schedule.searchScheduledFlight(flight.getNumber());
-                    FlightOrder order = customer.createOrder(Arrays.asList("Amanda", "Max"), Arrays.asList(scheduledFlight), 180);
+                    FlightOrder order = customer.createOrder(Arrays.asList("Amanda", "Max"), Collections.singletonList(scheduledFlight), 180);
 
                     assertEquals(2, scheduledFlight.getPassengers().size());
                     assertEquals(4, scheduledFlight.getCapacity());
@@ -160,7 +161,7 @@ public class ScenarioTest {
             @DisplayName("then the payment should not succeed and the booking should not be closed/payed")
             void thenThePaymentAndBookingShouldNotSucceed() {
                 ScheduledFlight scheduledFlight = schedule.searchScheduledFlight(flight.getNumber());
-                FlightOrder order = customer.createOrder(Arrays.asList("Max"), Arrays.asList(scheduledFlight), 100);
+                FlightOrder order = customer.createOrder(Collections.singletonList("Max"), Collections.singletonList(scheduledFlight), 100);
                 assertThrows(IllegalStateException.class, () -> order.processOrderWithCreditCard(creditCard));
                 assertFalse(order.isClosed());
             }
@@ -179,7 +180,7 @@ public class ScenarioTest {
             @DisplayName("then the booking should not be closed/payed")
             void thenTheBookingShouldNotSucceed() {
                 ScheduledFlight scheduledFlight = schedule.searchScheduledFlight(flight.getNumber());
-                FlightOrder order = customer.createOrder(Arrays.asList("Max"), Arrays.asList(scheduledFlight), 100);
+                FlightOrder order = customer.createOrder(Collections.singletonList("Max"), Collections.singletonList(scheduledFlight), 100);
                 assertThrows(IllegalStateException.class, () -> order.processOrderWithCreditCard(creditCard));
                 assertFalse(order.isClosed());
             }
@@ -199,7 +200,7 @@ public class ScenarioTest {
             @DisplayName("then the booking should succeed")
             void thenTheBookingShouldSucceed() throws NoSuchFieldException {
                 ScheduledFlight scheduledFlight = schedule.searchScheduledFlight(flight.getNumber());
-                FlightOrder order = customer.createOrder(Arrays.asList("Max"), Arrays.asList(scheduledFlight), 100);
+                FlightOrder order = customer.createOrder(Collections.singletonList("Max"), Collections.singletonList(scheduledFlight), 100);
                 boolean processed = order.processOrderWithCreditCard(creditCard);
                 assertTrue(processed);
                 assertTrue(order.isClosed());
