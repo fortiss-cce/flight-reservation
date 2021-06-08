@@ -5,7 +5,7 @@ import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.order.FlightOrder;
 import flight.reservation.payment.CreditCard;
-import flight.reservation.payment.Payment;
+import flight.reservation.payment.PaymentMethod;
 import flight.reservation.payment.Paypal;
 import flight.reservation.plane.Helicopter;
 import flight.reservation.plane.PassengerPlane;
@@ -123,7 +123,7 @@ public class ScenarioTest {
                     assertFalse(order.isClosed());
                     assertEquals(order, customer.getOrders().get(0));
 
-                    Payment paypal = new Paypal(customer.getEmail(), "amanda1985");
+                    PaymentMethod paypal = new Paypal(customer.getEmail(), "amanda1985");
                     boolean isProcessed = paypal.processOrder(order);
                     assertTrue(isProcessed);
                     assertTrue(order.isClosed());

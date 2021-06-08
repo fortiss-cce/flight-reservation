@@ -4,10 +4,10 @@ import flight.reservation.order.FlightOrder;
 
 import java.util.Date;
 
-public abstract class Payment {
+public abstract class PaymentMethod {
     protected double amount;
 
-    public Payment() {
+    public PaymentMethod() {
         this.amount = 0;
     }
 

@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Dummy credit card class.
  */
-public class CreditCard extends Payment {
+public class CreditCard extends PaymentMethod {
     private final String number;
     private final Date date;
     private final String cvv;

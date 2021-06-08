@@ -5,7 +5,7 @@ import flight.reservation.order.FlightOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Paypal extends Payment {
+public class Paypal extends PaymentMethod {
     public static final Map<String, String> DATA_BASE = new HashMap<>();
 
     static {
