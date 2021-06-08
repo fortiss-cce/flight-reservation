@@ -29,7 +29,7 @@ public class Flight {
     }
 
     private boolean isAircraftValid(Airport airport) {
-        return Arrays.stream(airport.getAllowedAircrafts()).anyMatch(x -> {
+        return Arrays.stream(airport.getAllowedAircraft()).anyMatch(x -> {
             String model;
             if (this.aircraft instanceof PassengerPlane) {
                 model = ((PassengerPlane) this.aircraft).model;

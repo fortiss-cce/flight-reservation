@@ -10,20 +10,20 @@ public class Airport {
     private final String code;
     private final String location;
     private List<Flight> flights;
-    private String[] allowedAircrafts;
+    private String[] allowedAircraft;
 
     public Airport(String name, String code, String location) {
         this.name = name;
         this.code = code;
         this.location = location;
-        this.allowedAircrafts = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"};
+        this.allowedAircraft = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"};
     }
 
-    public Airport(String name, String code, String location, String[] allowedAircrafts) {
+    public Airport(String name, String code, String location, String[] allowedAircraft) {
         this.name = name;
         this.code = code;
         this.location = location;
-        this.allowedAircrafts = allowedAircrafts;
+        this.allowedAircraft = allowedAircraft;
     }
 
     public String getName() {
@@ -46,7 +46,7 @@ public class Airport {
         this.flights = flights;
     }
 
-    public String[] getAllowedAircrafts() {
-        return allowedAircrafts;
+    public String[] getAllowedAircraft() {
+        return allowedAircraft;
     }
 }
