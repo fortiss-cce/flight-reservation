@@ -2,9 +2,6 @@ package flight.reservation.flight;
 
 import flight.reservation.Airport;
 import flight.reservation.plane.Aircraft;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
 
 import java.util.Arrays;
 
@@ -24,13 +21,13 @@ public class Flight {
     }
 
     private void checkValidity() throws IllegalArgumentException {
-        if (isAircraftValid(departure) || isAircraftValid(arrival)) {
+        if (!isAircraftValid(departure) || !isAircraftValid(arrival)) {
             throw new IllegalArgumentException("Selected aircraft is not valid for the selected route.");
         }
     }
 
     private boolean isAircraftValid(Airport airport) {
-        return Arrays.stream(airport.getAllowedAircraft()).noneMatch(x -> x.equals(this.aircraft.getModel()));
+        return Arrays.asList(airport.getAllowedAircraft()).contains(aircraft.getModel());
     }
 
     public Aircraft getAircraft() {
