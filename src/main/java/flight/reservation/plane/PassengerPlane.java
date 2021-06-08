@@ -2,8 +2,6 @@ package flight.reservation.plane;
 
 public class PassengerPlane extends Aircraft {
 
-    private int crewCapacity;
-
     public enum PlaneModel {
         A350("A350", 320, 40),
         A380("A380", 500, 42),
@@ -11,18 +9,18 @@ public class PassengerPlane extends Aircraft {
         EMBRAER_190("Embraer 190", 25, 5);
 
         private String displayName;
-        private int passengetCapacity;
+        private int passengerCapacity;
         private int crewCapacity;
 
 
         PlaneModel(String displayName, int passengerCapacity, int crewCapacity) {
             this.displayName = displayName;
-            this.passengetCapacity = passengerCapacity;
+            this.passengerCapacity = passengerCapacity;
             this.crewCapacity = crewCapacity;
         }
 
         int getPassengerCapacity() {
-            return passengetCapacity;
+            return passengerCapacity;
         }
 
         int getCrewCapacity() {
@@ -38,16 +36,11 @@ public class PassengerPlane extends Aircraft {
     }
 
     public PassengerPlane(PlaneModel model) {
-        super(model.displayName, model.getPassengerCapacity());
-        this.crewCapacity = model.getCrewCapacity();
+        super(model.displayName, model.getPassengerCapacity(), model.getCrewCapacity());
     }
 
     public PassengerPlane(String model) {
         this(PlaneModel.getEnum(model));
-    }
-
-    public int getCrewCapacity() {
-        return crewCapacity;
     }
 
 }
