@@ -19,20 +19,9 @@ public class Flight {
     }
 
     private void checkValidity() throws IllegalArgumentException {
-        if (!isAircraftValid(departure) || !isAircraftValid(arrival)) {
+        if (!departure.isAllowedAircraft(this.aircraft) || (!arrival.isAllowedAircraft(this.aircraft))) {
             throw new IllegalArgumentException("Selected aircraft is not valid for the selected route.");
         }
-    }
-
-    private boolean isAircraftValid(Airport airport) {
-
-        for (String allowedAircraft : airport.getAllowedAircrafts()) {
-            String model = this.aircraft.getModel();
-            if (allowedAircraft.equals(model)){
-                return true;
-            }
-        }
-        return false;
     }
 
     public Aircraft getAircraft() {

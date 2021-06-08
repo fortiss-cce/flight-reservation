@@ -1,6 +1,7 @@
 package flight.reservation.plane;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class AircraftFactory {
@@ -14,6 +15,10 @@ public class AircraftFactory {
 		put("H2", () -> new PessengerHelicopter("H2", 6, 2));
 		put("HypaHype", () -> new PassengerDrone("HypaHype", 4, 0));
 	}};
+
+	public static Set<String> allAircraftTypes() {
+		return modelToCapacity.keySet();
+	}
 
 	private static Aircraft createByType(String type){
 		Supplier<Aircraft> supplier = modelToCapacity.get(type);
