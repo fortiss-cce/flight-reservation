@@ -1,25 +1,19 @@
 package flight.reservation.plane;
 
-public class Helicopter {
-    private final String model;
-    private final int passengerCapacity;
+public class Helicopter extends AirCraft {
 
     public Helicopter(String model) {
         this.model = model;
         if (model.equals("H1")) {
-            passengerCapacity = 4;
+            this.passengerCapacity = 4;
         } else if (model.equals("H2")) {
-            passengerCapacity = 6;
+            this.passengerCapacity = 6;
         } else {
             throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
         }
+        this.crewCapacity = 0;
+
     }
 
-    public String getModel() {
-        return model;
-    }
 
-    public int getPassengerCapacity() {
-        return passengerCapacity;
-    }
 }

@@ -1,10 +1,6 @@
 package flight.reservation.plane;
 
-public class PassengerPlane {
-
-    public String model;
-    public int passengerCapacity;
-    public int crewCapacity;
+public class PassengerPlane extends AirCraft{
 
     public PassengerPlane(String model) {
         this.model = model;
