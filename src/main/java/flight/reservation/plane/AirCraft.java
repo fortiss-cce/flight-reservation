@@ -2,7 +2,7 @@ package flight.reservation.plane;
 
 public abstract class AirCraft {
 
-    protected String model; //TODO: replace strings by enum
+    protected String model;
     protected int passengerCapacity;
     protected int crewCapacity;
 

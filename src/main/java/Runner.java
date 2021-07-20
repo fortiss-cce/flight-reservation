@@ -1,10 +1,7 @@
 import flight.reservation.Airport;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.Flight;
-import flight.reservation.plane.AirCraft;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +24,7 @@ public class Runner {
             new PassengerPlane("Embraer 190"),
             new PassengerPlane("Antonov AN2"),
             new Helicopter("H1"),
-            new PassengerDrone("HypaHype")
+            new PassengerDrone(AirCraftModel.HypaHype)
     );
 
     static List<Flight> flights = Arrays.asList(
