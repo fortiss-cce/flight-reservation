@@ -13,11 +13,17 @@ public class PassengerDrone implements Aircraft {
 
     @Override
     public int getPassengerCapacity() {
-        return 0;
+        return 4;
     }
 
     @Override
     public int getCrewMemberCapacity() {
         return 0;
     }
+
+    @Override
+    public String getModel() {
+        return model;
+    }
+
 }

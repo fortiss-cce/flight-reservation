@@ -17,6 +17,7 @@ public class Helicopter implements Aircraft {
         }
     }
 
+    @Override
     public String getModel() {
         switch (model) {
             case H1:
@@ -24,7 +25,7 @@ public class Helicopter implements Aircraft {
             case H2:
                 return "H2";
         }
-        throw new IllegalStateException("Illegel model");
+        throw new IllegalStateException("Illegal model");
     }
 
     @Override
@@ -35,11 +36,12 @@ public class Helicopter implements Aircraft {
             case H2:
                 return 6;
         }
-        throw new IllegalStateException("Illegel model");
+        throw new IllegalStateException("Illegal model");
     }
 
     @Override
     public int getCrewMemberCapacity() {
         return 2;
     }
+
 }

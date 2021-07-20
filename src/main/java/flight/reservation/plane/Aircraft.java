@@ -4,4 +4,6 @@ public interface Aircraft {
     public int getPassengerCapacity();
 
     public int getCrewMemberCapacity();
+
+    public String getModel();
 }
