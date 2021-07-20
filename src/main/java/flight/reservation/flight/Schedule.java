@@ -23,16 +23,20 @@ public class Schedule {
     }
 
     public void removeFlight(Flight flight) {
-        List<ScheduledFlight> tbr = new ArrayList<>();
+        List<ScheduledFlight> toBeRemovedFlights = new ArrayList<>();
         for (ScheduledFlight scheduledFlight : scheduledFlights) {
-            if (scheduledFlight == flight ||
-                    (flight.getArrival() == scheduledFlight.getArrival() &&
-                            flight.getDeparture() == scheduledFlight.getDeparture() &&
-                            flight.getNumber() == scheduledFlight.getNumber())) {
-                tbr.add(scheduledFlight);
+            if (checkIsToBeRemoved(flight, scheduledFlight)) {
+                toBeRemovedFlights.add(scheduledFlight);
             }
         }
-        scheduledFlights.removeAll(tbr);
+        scheduledFlights.removeAll(toBeRemovedFlights);
+    }
+
+    private boolean checkIsToBeRemoved(Flight flight, ScheduledFlight scheduledFlight) {
+       return (scheduledFlight == flight ||
+               (flight.getArrival() == scheduledFlight.getArrival() &&
+                       flight.getDeparture() == scheduledFlight.getDeparture() &&
+                       flight.getNumber() == scheduledFlight.getNumber()));
     }
 
     public void removeScheduledFlight(ScheduledFlight flight) {
