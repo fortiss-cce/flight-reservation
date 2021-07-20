@@ -1,13 +1,8 @@
 package flight.reservation.plane;
 
-public class PassengerPlane {
-
-    public String model;
-    public int passengerCapacity;
-    public int crewCapacity;
-
+public class PassengerPlane extends AAircraft {
     public PassengerPlane(String model) {
-        this.model = model;
+        super(model);
         switch (model) {
             case "A380":
                 passengerCapacity = 500;

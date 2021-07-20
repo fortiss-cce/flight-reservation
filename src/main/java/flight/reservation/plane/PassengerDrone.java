@@ -1,12 +1,10 @@
 package flight.reservation.plane;
 
-public class PassengerDrone {
-    private final String model;
-
+public class PassengerDrone extends AAircraft {
     public PassengerDrone(String model) {
-        if (model.equals("HypaHype")) {
-            this.model = model;
-        } else {
+        super(model);
+        passengerCapacity = 4;
+        if (!model.equals("HypaHype")) {
             throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
         }
     }

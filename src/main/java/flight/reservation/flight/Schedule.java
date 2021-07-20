@@ -25,10 +25,7 @@ public class Schedule {
     public void removeFlight(Flight flight) {
         List<ScheduledFlight> tbr = new ArrayList<>();
         for (ScheduledFlight scheduledFlight : scheduledFlights) {
-            if (scheduledFlight == flight ||
-                    (flight.getArrival() == scheduledFlight.getArrival() &&
-                            flight.getDeparture() == scheduledFlight.getDeparture() &&
-                            flight.getNumber() == scheduledFlight.getNumber())) {
+            if (scheduledFlight.equals(flight)) {
                 tbr.add(scheduledFlight);
             }
         }
