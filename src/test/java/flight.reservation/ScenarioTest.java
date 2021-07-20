@@ -120,8 +120,7 @@ public class ScenarioTest {
                     assertFalse(order.isClosed());
                     assertEquals(order, customer.getOrders().get(0));
 
-                    boolean isProcessed = order.processOrderWithPayPal(customer.getEmail(), "amanda1985");
-                    assertTrue(isProcessed);
+                    order.processOrderWithPayPal(customer.getEmail(), "amanda1985");
                     assertTrue(order.isClosed());
                 }
             }
@@ -200,8 +199,7 @@ public class ScenarioTest {
             void thenTheBookingShouldSucceed() throws NoSuchFieldException {
                 ScheduledFlight scheduledFlight = schedule.searchScheduledFlight(flight.getNumber());
                 FlightOrder order = customer.createOrder(Arrays.asList("Max"), Arrays.asList(scheduledFlight), 100);
-                boolean processed = order.processOrderWithCreditCard(creditCard);
-                assertTrue(processed);
+                order.processOrderWithCreditCard(creditCard);
                 assertTrue(order.isClosed());
                 assertEquals(order, customer.getOrders().get(0));
                 assertEquals(900, creditCard.getAmount());

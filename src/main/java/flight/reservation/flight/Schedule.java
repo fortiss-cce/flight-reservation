@@ -23,16 +23,13 @@ public class Schedule {
     }
 
     public void removeFlight(Flight flight) {
-        List<ScheduledFlight> tbr = new ArrayList<>();
+        List<ScheduledFlight> toBeRemoved = new ArrayList<>();
         for (ScheduledFlight scheduledFlight : scheduledFlights) {
-            if (scheduledFlight == flight ||
-                    (flight.getArrival() == scheduledFlight.getArrival() &&
-                            flight.getDeparture() == scheduledFlight.getDeparture() &&
-                            flight.getNumber() == scheduledFlight.getNumber())) {
-                tbr.add(scheduledFlight);
+            if (scheduledFlight.isEqual(flight)) {
+                toBeRemoved.add(scheduledFlight);
             }
         }
-        scheduledFlights.removeAll(tbr);
+        scheduledFlights.removeAll(toBeRemoved);
     }
 
     public void removeScheduledFlight(ScheduledFlight flight) {
@@ -40,10 +37,7 @@ public class Schedule {
     }
 
     public ScheduledFlight searchScheduledFlight(int flightNumber) {
-        return scheduledFlights.stream()
-                .filter(f -> f.getNumber() == flightNumber)
-                .findFirst()
-                .orElse(null);
+        return scheduledFlights.stream().filter(f -> f.getNumber() == flightNumber).findFirst().orElse(null);
     }
 
     public void clear() {
