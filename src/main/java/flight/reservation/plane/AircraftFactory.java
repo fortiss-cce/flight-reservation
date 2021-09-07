@@ -24,12 +24,14 @@ public class AircraftFactory {
                 aircraft = new Helicopter("H2", 6, 0);
                 break;
             case HypaHype:
-                aircraft = new PassengerDrone("HypaHype" ,0 ,2);
+                aircraft = new PassengerDrone("HypaHype", 0, 2);
                 break;
             default:
                 throw new IllegalArgumentException(String.format(
                         "Model type '%s' is not recognized", type));
         }
         return aircraft;
+
+    }
 
 }

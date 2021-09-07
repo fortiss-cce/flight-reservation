@@ -1,12 +1,12 @@
 import flight.reservation.Airport;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.Flight;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.*;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static flight.reservation.plane.AircraftModelType.*;// wildcard is bad and should be changed
 
 public class Runner {
     static List<Airport> airports = Arrays.asList(
@@ -21,12 +21,14 @@ public class Runner {
     );
 
     static List<Object> aircrafts = Arrays.asList(
-            new PassengerPlane("A380"),
-            new PassengerPlane("A350"),
-            new PassengerPlane("Embraer 190"),
-            new PassengerPlane("Antonov AN2"),
-            new Helicopter("H1"),
-            new PassengerDrone("HypaHype")
+
+            AircraftFactory.createInstance(A380),
+            AircraftFactory.createInstance(A350),
+            AircraftFactory.createInstance(Embraer190),
+            AircraftFactory.createInstance(AntonovAN2),
+            AircraftFactory.createInstance(H1),
+            AircraftFactory.createInstance(H2),
+            AircraftFactory.createInstance(HypaHype)
     );
 
 
