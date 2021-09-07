@@ -2,7 +2,7 @@ package flight.reservation;
 
 public class Passenger {
 
-    private final String name;
+    protected String name;
 
     public Passenger(String name) {
         this.name = name;

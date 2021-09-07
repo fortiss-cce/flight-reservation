@@ -107,4 +107,33 @@ public class FlightOrder extends Order {
             return false;
         }
     }
+
+
+    public static FlightOrder createOrder(Customer customer, List<ScheduledFlight> flights, double price) {
+        if (!isOrderValid(customer.getName(), flights)) {
+            throw new IllegalStateException("Order is not valid");
+        }
+
+        FlightOrder order = new FlightOrder(flights);
+        order.setCustomer(customer);
+        order.setPrice(price);
+        order.setPassengers(Arrays.asList(customer));
+
+        order.getScheduledFlights().forEach(scheduledFlight -> scheduledFlight.addPassengers(Arrays.asList(customer)));
+        return order;
+    }
+
+    private static boolean isOrderValid(String passengerName, List<ScheduledFlight> flights) {
+        boolean valid = true;
+        valid = valid && !FlightOrder.getNoFlyList().contains(passengerName);
+        valid = valid && flights.stream().allMatch(scheduledFlight -> {
+            try {
+                return scheduledFlight.getAvailableCapacity() >= scheduledFlight.getPassengers().size();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+                return false;
+            }
+        });
+        return valid;
+    }
 }
