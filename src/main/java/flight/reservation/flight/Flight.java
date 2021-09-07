@@ -44,6 +44,12 @@ public class Flight {
         });
     }
 
+    public boolean isSameFlight(Flight flightToCompare) {
+        return this.getArrival() == flightToCompare.getArrival() &&
+                this.getDeparture() == flightToCompare.getDeparture() &&
+                this.getNumber() == flightToCompare.getNumber();
+    }
+
     public Object getAircraft() {
         return aircraft;
     }
