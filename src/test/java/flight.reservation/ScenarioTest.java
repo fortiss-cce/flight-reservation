@@ -118,7 +118,7 @@ public class ScenarioTest {
                     assertEquals(2, scheduledFlight.getPassengers().size());
                     assertEquals(4, scheduledFlight.getCapacity());
                     assertEquals(2, scheduledFlight.getAvailableCapacity());
-                    assertTrue(scheduledFlight.getPassengers().stream().anyMatch(passenger -> passenger.getName().equals("Max")));
+                    assertTrue(scheduledFlight.getPassengers().stream().anyMatch(passenger -> passenger.getName().equals("Max Mustermann")));
                     assertTrue(scheduledFlight.getPassengers().stream().anyMatch(passenger -> passenger.getName().equals("Amanda")));
                     assertFalse(order.isClosed());
                     assertEquals(order, customer.getOrders().get(0));
