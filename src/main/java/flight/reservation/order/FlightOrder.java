@@ -142,4 +142,9 @@ public class FlightOrder extends Order {
         }
         return isPaid;
     }
+
+    public static boolean isNameOnNoFlyList(String name) {
+        return FlightOrder.getNoFlyList().contains(name);
+    }
+
 }

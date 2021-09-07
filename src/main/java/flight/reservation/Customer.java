@@ -39,8 +39,8 @@ public class Customer {
 
     private boolean isOrderValid(List<String> passengerNames, List<ScheduledFlight> flights) {
         boolean valid = true;
-        valid = valid && !FlightOrder.getNoFlyList().contains(this.getName());
-        valid = valid && passengerNames.stream().noneMatch(passenger -> FlightOrder.getNoFlyList().contains(passenger));
+        valid = valid && !FlightOrder.isNameOnNoFlyList(this.getName());
+        valid = valid && passengerNames.stream().noneMatch(passenger -> FlightOrder.isNameOnNoFlyList(passenger));
         valid = valid && flights.stream().allMatch(scheduledFlight -> {
             try {
                 return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
