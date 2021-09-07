@@ -88,5 +88,7 @@ public class ScheduledFlight {
 
     public Flight getFlight() {return this.flight;}
 
-    public int getFlightNumber() {return this.flight.getNumber();}
+    public int getNumber() {return this.flight.getNumber();}
+    public Airport getArrival() {return this.flight.getArrival();}
+    public Airport getDeparture() {return this.flight.getDeparture();}
 }

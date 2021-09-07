@@ -39,7 +39,7 @@ public class Schedule {
 
     public ScheduledFlight searchScheduledFlight(int flightNumber) {
         return scheduledFlights.stream()
-                .filter(f -> f.getFlightNumber() == flightNumber)
+                .filter(f -> f.getNumber() == flightNumber)
                 .findFirst()
                 .orElse(null);
     }
