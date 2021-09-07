@@ -85,4 +85,8 @@ public class ScheduledFlight {
     public void setCurrentPrice(double currentPrice) {
         this.currentPrice = currentPrice;
     }
+
+    public Flight getFlight() {return this.flight;}
+
+    public int getFlightNumber() {return this.flight.getNumber();}
 }

@@ -25,8 +25,8 @@ public class Schedule {
     public void removeFlight(Flight flight) {
         List<ScheduledFlight> flightsToBeRemoved = new ArrayList<>();
         for (ScheduledFlight scheduledFlight : scheduledFlights) {
-            if (scheduledFlight == flight ||
-                    flight.isSameFlight(scheduledFlight)) {
+            if (scheduledFlight.getFlight() == flight ||
+                    flight.isSameFlight(scheduledFlight.getFlight())) {
                 flightsToBeRemoved.add(scheduledFlight);
             }
         }
@@ -39,7 +39,7 @@ public class Schedule {
 
     public ScheduledFlight searchScheduledFlight(int flightNumber) {
         return scheduledFlights.stream()
-                .filter(f -> f.getNumber() == flightNumber)
+                .filter(f -> f.getFlightNumber() == flightNumber)
                 .findFirst()
                 .orElse(null);
     }
