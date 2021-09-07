@@ -13,7 +13,6 @@ public class ScheduledFlight {
     private final List<Passenger> passengers;
     private final Date departureTime;
     private FlightRoute flightRoute;
-    private double currentPrice = 100;
     protected Aircraft aircraft;
 
     public ScheduledFlight(FlightRoute flightRoute, Aircraft aircraft, Date departureTime)
@@ -22,16 +21,6 @@ public class ScheduledFlight {
         this.aircraft = aircraft;
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
-        checkValidity();
-    }
-
-    public ScheduledFlight(FlightRoute flightRoute, Aircraft aircraft, Date departureTime,
-                           double currentPrice) throws IllegalArgumentException {
-        this.flightRoute = flightRoute;
-        this.aircraft = aircraft;
-        this.departureTime = departureTime;
-        this.passengers = new ArrayList<>();
-        this.currentPrice = currentPrice;
         checkValidity();
     }
 
@@ -61,10 +50,6 @@ public class ScheduledFlight {
 
     private boolean isAircraftValid(Airport airport) {
         return airport.getAllowedAircrafts().contains(this.aircraft.getModel());
-    }
-
-    public Aircraft getAircraft() {
-        return aircraft;
     }
 
     public FlightRoute getFlightRoute(){
