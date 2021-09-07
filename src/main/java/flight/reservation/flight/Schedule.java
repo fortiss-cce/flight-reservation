@@ -18,17 +18,17 @@ public class Schedule {
     }
 
     public void scheduleFlight(Flight flight, Date date) {
-        ScheduledFlight scheduledFlight = new ScheduledFlight(flight.getNumber(), flight.getDeparture(), flight.getArrival(), flight.getAircraft(), date);
-        scheduledFlights.add(scheduledFlight);
+        scheduledFlights.add(new ScheduledFlight(flight, date));
     }
 
     public void removeFlight(Flight flight) {
         List<ScheduledFlight> tbr = new ArrayList<>();
         for (ScheduledFlight scheduledFlight : scheduledFlights) {
-            if (scheduledFlight == flight ||
-                    (flight.getArrival() == scheduledFlight.getArrival() &&
-                            flight.getDeparture() == scheduledFlight.getDeparture() &&
-                            flight.getNumber() == scheduledFlight.getNumber())) {
+            Flight flightInSchedule = scheduledFlight.getFlight();
+            if (flightInSchedule == flight ||
+                (flight.getArrival() == flightInSchedule.getArrival() &&
+                 flight.getDeparture() == flightInSchedule.getDeparture() &&
+                 flight.getNumber() == flightInSchedule.getNumber())) {
                 tbr.add(scheduledFlight);
             }
         }
@@ -41,7 +41,7 @@ public class Schedule {
 
     public ScheduledFlight searchScheduledFlight(int flightNumber) {
         return scheduledFlights.stream()
-                .filter(f -> f.getNumber() == flightNumber)
+                .filter(f -> f.getFlight().getNumber() == flightNumber)
                 .findFirst()
                 .orElse(null);
     }

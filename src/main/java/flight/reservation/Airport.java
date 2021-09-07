@@ -13,13 +13,17 @@ public class Airport {
     private String[] allowedAircrafts;
 
     public Airport(String name, String code, String location) {
-        this.name = name;
-        this.code = code;
-        this.location = location;
-        this.allowedAircrafts = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"};
+        this(
+            name,
+            code,
+            location,
+            new String[]{"A380", "A350", "Embraer 190",
+                         "Antonov AN2", "H1", "H2", "HypaHype"}
+        );
     }
 
-    public Airport(String name, String code, String location, String[] allowedAircrafts) {
+    public Airport(String name, String code,
+                   String location, String[] allowedAircrafts) {
         this.name = name;
         this.code = code;
         this.location = location;

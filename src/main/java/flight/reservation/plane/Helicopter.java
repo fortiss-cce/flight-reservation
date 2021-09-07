@@ -1,25 +1,35 @@
 package flight.reservation.plane;
 
-public class Helicopter {
+import flight.reservation.plane.Aircraft;
+
+
+public class Helicopter implements Aircraft {
     private final String model;
     private final int passengerCapacity;
 
     public Helicopter(String model) {
         this.model = model;
         if (model.equals("H1")) {
-            passengerCapacity = 4;
+            this.passengerCapacity = 4;
         } else if (model.equals("H2")) {
-            passengerCapacity = 6;
+            this.passengerCapacity = 6;
         } else {
             throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
         }
     }
 
+    @Override
     public String getModel() {
-        return model;
+        return this.model;
     }
 
+    @Override
     public int getPassengerCapacity() {
-        return passengerCapacity;
+        return this.passengerCapacity;
+    }
+
+    @Override
+    public int getCrewCapacity() {
+        return 2;
     }
 }
