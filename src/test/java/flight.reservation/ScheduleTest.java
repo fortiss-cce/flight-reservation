@@ -55,7 +55,7 @@ public class ScheduleTest {
         @DisplayName("then removing a flight should still yield an empty list")
         void thenScheduleShouldYieldEmpty() {
             Aircraft aircraft = AircraftFactory.create("A380");
-            schedule.removeFlight(new FlightRoute(1, new Airport("a", "a", "a"), new Airport("b", "b", "b")));
+            schedule.removeFlight(new FlightRoute(1, new Airport("a"), new Airport("b")));
             assertEquals(0, schedule.getScheduledFlights().size());
         }
 
@@ -68,8 +68,8 @@ public class ScheduleTest {
 
             @BeforeEach
             void scheduleOneFlight() {
-                Airport startAirport = new Airport("Berlin Airport", "BER", "Berlin, Berlin");
-                Airport destAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
+                Airport startAirport = new Airport("BER");
+                Airport destAirport = new Airport("FRA");
 
                 Aircraft aircraft = AircraftFactory.create("A380");
                 flightRoute = new FlightRoute(1, startAirport, destAirport);
@@ -111,16 +111,15 @@ public class ScheduleTest {
     @Nested
     @DisplayName("Given an existing Schedule")
     class GivenAnExistingSchedule {
-
         List<Airport> airports = Arrays.asList(
-                new Airport("Berlin Airport", "BER", "Berlin, Berlin"),
-                new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse"),
-                new Airport("Madrid Barajas Airport", "MAD", "Barajas, Madrid"),
-                new Airport("Guarulhos International Airport", "GRU", "Guarulhos (São Paulo)"),
-                new Airport("John F. Kennedy International Airport", "JFK", "Queens, New York, New York"),
-                new Airport("Istanbul Airport", "IST", "Arnavutköy, Istanbul"),
-                new Airport("Dubai International Airport", "DXB", "Garhoud, Dubai"),
-                new Airport("Chengdu Shuangliu International Airport", "CTU", "Shuangliu-Wuhou, Chengdu, Sichuan")
+                new Airport( "BER"),
+                new Airport("FRA"),
+                new Airport("MAD"),
+                new Airport("GRU"),
+                new Airport("JFK"),
+                new Airport("IST"),
+                new Airport("DXB"),
+                new Airport("CTU")
         );
 
         List<FlightRoute> flightRoutes = Arrays.asList(

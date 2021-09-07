@@ -51,8 +51,8 @@ public class ScenarioTest {
 
             @BeforeEach
             public void initFlights() {
-                startAirport = new Airport("John F. Kennedy International Airport", "JFK", "Queens, New York, New York");
-                destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
+                startAirport = new Airport("JFK");
+                destinationAirport = new Airport("FRA");
                 Aircraft aircraft = AircraftFactory.create("H1");
                 flightRoute = new FlightRoute(1, startAirport, destinationAirport);
                 Date departure = TestUtil.addDays(Date.from(Instant.now()), 3);
@@ -121,8 +121,8 @@ public class ScenarioTest {
         @BeforeEach
         public void init() {
             // flights
-            startAirport = new Airport("Berlin Airport", "BER", "Berlin, Berlin");
-            destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
+            startAirport = new Airport("BER");
+            destinationAirport = new Airport("FRA");
             Aircraft aircraft = AircraftFactory.create("A380");
             flightRoute = new FlightRoute(1, startAirport, destinationAirport);
             Date departure = TestUtil.addDays(Date.from(Instant.now()), 3);
