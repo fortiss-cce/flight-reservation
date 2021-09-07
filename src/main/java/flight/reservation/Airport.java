@@ -1,7 +1,9 @@
 package flight.reservation;
 
 import flight.reservation.flight.Flight;
+import flight.reservation.plane.AircraftFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Airport {
@@ -10,16 +12,16 @@ public class Airport {
     private final String code;
     private final String location;
     private List<Flight> flights;
-    private String[] allowedAircrafts;
+    private ArrayList<String> allowedAircrafts;
 
     public Airport(String name, String code, String location) {
         this.name = name;
         this.code = code;
         this.location = location;
-        this.allowedAircrafts = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"};
+        this.allowedAircrafts = AircraftFactory.getAllowedModels();
     }
 
-    public Airport(String name, String code, String location, String[] allowedAircrafts) {
+    public Airport(String name, String code, String location, ArrayList<String> allowedAircrafts) {
         this.name = name;
         this.code = code;
         this.location = location;
@@ -46,7 +48,7 @@ public class Airport {
         this.flights = flights;
     }
 
-    public String[] getAllowedAircrafts() {
+    public ArrayList<String> getAllowedAircrafts() {
         return allowedAircrafts;
     }
 }
