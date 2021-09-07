@@ -1,6 +1,8 @@
 package flight.reservation.order;
 
 import flight.reservation.Customer;
+import flight.reservation.Passenger;
+import flight.reservation.flight.Flight;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.payment.CreditCard;
 import flight.reservation.payment.Paypal;
@@ -8,6 +10,7 @@ import flight.reservation.payment.Paypal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlightOrder extends Order {
     private final List<ScheduledFlight> flights;

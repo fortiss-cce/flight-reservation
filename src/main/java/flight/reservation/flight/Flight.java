@@ -1,11 +1,13 @@
 package flight.reservation.flight;
 
 import flight.reservation.Airport;
+import flight.reservation.plane.AbstractPlane;
 import flight.reservation.plane.Helicopter;
 import flight.reservation.plane.PassengerDrone;
 import flight.reservation.plane.PassengerPlane;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Flight {
 
@@ -30,17 +32,9 @@ public class Flight {
 
     private boolean isAircraftValid(Airport airport) {
         return Arrays.stream(airport.getAllowedAircrafts()).anyMatch(x -> {
-            String model;
-            if (this.aircraft instanceof PassengerPlane) {
-                model = ((PassengerPlane) this.aircraft).model;
-            } else if (this.aircraft instanceof Helicopter) {
-                model = ((Helicopter) this.aircraft).getModel();
-            } else if (this.aircraft instanceof PassengerDrone) {
-                model = "HypaHype";
-            } else {
-                throw new IllegalArgumentException(String.format("Aircraft is not recognized"));
-            }
-            return x.equals(model);
+            AbstractPlane plane = (AbstractPlane)this.aircraft;
+            // TODO: throw new IllegalArgumentException(String.format("Aircraft is not recognized"));
+            return x.equals(plane.getModel());
         });
     }
 
@@ -58,6 +52,20 @@ public class Flight {
 
     public Airport getArrival() {
         return arrival;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight1 = (Flight) o;
+        return number == flight1.number &&
+                departure.equals(flight1.departure) &&
+                arrival.equals(flight1.arrival);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, departure, arrival);
     }
 
     @Override
