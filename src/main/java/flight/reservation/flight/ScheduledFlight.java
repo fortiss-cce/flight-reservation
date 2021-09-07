@@ -8,23 +8,31 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ScheduledFlight extends Flight {
+public class ScheduledFlight {
 
     private final List<Passenger> passengers;
     private final Date departureTime;
+    private FlightRoute flightRoute;
     private double currentPrice = 100;
+    protected Aircraft aircraft;
 
-    public ScheduledFlight(int number, Airport departure, Airport arrival, Aircraft aircraft, Date departureTime) {
-        super(number, departure, arrival, aircraft);
+    public ScheduledFlight(FlightRoute flightRoute, Aircraft aircraft, Date departureTime)
+            throws IllegalArgumentException {
+        this.flightRoute = flightRoute;
+        this.aircraft = aircraft;
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
+        checkValidity();
     }
 
-    public ScheduledFlight(int number, Airport departure, Airport arrival, Aircraft aircraft, Date departureTime, double currentPrice) {
-        super(number, departure, arrival, aircraft);
+    public ScheduledFlight(FlightRoute flightRoute, Aircraft aircraft, Date departureTime,
+                           double currentPrice) throws IllegalArgumentException {
+        this.flightRoute = flightRoute;
+        this.aircraft = aircraft;
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
         this.currentPrice = currentPrice;
+        checkValidity();
     }
 
     public void addPassengers(List<Passenger> passengers) {
@@ -49,5 +57,23 @@ public class ScheduledFlight extends Flight {
 
     public List<Passenger> getPassengers() {
         return passengers;
+    }
+
+    private boolean isAircraftValid(Airport airport) {
+        return airport.getAllowedAircrafts().contains(this.aircraft.getModel());
+    }
+
+    public Aircraft getAircraft() {
+        return aircraft;
+    }
+
+    public FlightRoute getFlightRoute(){
+        return this.flightRoute;
+    }
+
+    private void checkValidity() throws IllegalArgumentException {
+        if (!isAircraftValid(this.flightRoute.getDeparture()) || !isAircraftValid(this.flightRoute.getArrival())) {
+            throw new IllegalArgumentException("Selected aircraft is not valid for the selected route.");
+        }
     }
 }

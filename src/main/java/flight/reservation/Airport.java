@@ -1,6 +1,6 @@
 package flight.reservation;
 
-import flight.reservation.flight.Flight;
+import flight.reservation.flight.FlightRoute;
 import flight.reservation.plane.AircraftFactory;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Airport {
     private final String name;
     private final String code;
     private final String location;
-    private List<Flight> flights;
+    private List<FlightRoute> flightRoutes;
     private ArrayList<String> allowedAircrafts;
 
     public Airport(String name, String code, String location) {
@@ -40,12 +40,12 @@ public class Airport {
         return location;
     }
 
-    public List<Flight> getFlights() {
-        return flights;
+    public List<FlightRoute> getFlights() {
+        return flightRoutes;
     }
 
-    public void setFlights(List<Flight> flights) {
-        this.flights = flights;
+    public void setFlights(List<FlightRoute> flightRoutes) {
+        this.flightRoutes = flightRoutes;
     }
 
     public ArrayList<String> getAllowedAircrafts() {

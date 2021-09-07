@@ -1,6 +1,6 @@
 package flight.reservation;
 
-import flight.reservation.flight.Flight;
+import flight.reservation.flight.FlightRoute;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.plane.Aircraft;
@@ -55,15 +55,15 @@ public class ScheduleTest {
         @DisplayName("then removing a flight should still yield an empty list")
         void thenScheduleShouldYieldEmpty() {
             Aircraft aircraft = AircraftFactory.create("A380");
-            schedule.removeFlight(new Flight(1, new Airport("a", "a", "a"), new Airport("b", "b", "b"), aircraft));
+            schedule.removeFlight(new FlightRoute(1, new Airport("a", "a", "a"), new Airport("b", "b", "b")));
             assertEquals(0, schedule.getScheduledFlights().size());
         }
 
         @Nested
         @DisplayName("when a flight is scheduled")
-        class WhenAFlightIsScheduled {
+        class WhenAFlightRouteIsScheduled {
 
-            private Flight flight;
+            private FlightRoute flightRoute;
             private Date departure;
 
             @BeforeEach
@@ -72,9 +72,10 @@ public class ScheduleTest {
                 Airport destAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
 
                 Aircraft aircraft = AircraftFactory.create("A380");
-                flight = new Flight(1, startAirport, destAirport, aircraft);
+                flightRoute = new FlightRoute(1, startAirport, destAirport);
                 departure = TestUtil.addDays(Date.from(Instant.now()), 3);
-                schedule.scheduleFlight(flight, departure);
+                ScheduledFlight scheduledFlight = new ScheduledFlight(flightRoute, aircraft, departure);
+                schedule.scheduleFlight(scheduledFlight);
             }
 
             @Test
@@ -87,7 +88,7 @@ public class ScheduleTest {
             @DisplayName("then the correct flight should be scheduled")
             void thenScheduleShouldContainCorrectElement() {
                 ScheduledFlight scheduledFlight = schedule.getScheduledFlights().get(0);
-                assertEquals(flight.getNumber(), scheduledFlight.getNumber());
+                assertEquals(flightRoute.getNumber(), scheduledFlight.getFlightRoute().getNumber());
                 assertEquals(departure, scheduledFlight.getDepartureTime());
             }
 
@@ -101,7 +102,7 @@ public class ScheduleTest {
             @Test
             @DisplayName("then removing a flight should yield an empty list")
             void thenRemoveShouldYieldEmpty() {
-                schedule.removeFlight(flight);
+                schedule.removeFlight(flightRoute);
                 assertEquals(0, schedule.getScheduledFlights().size());
             }
         }
@@ -122,22 +123,24 @@ public class ScheduleTest {
                 new Airport("Chengdu Shuangliu International Airport", "CTU", "Shuangliu-Wuhou, Chengdu, Sichuan")
         );
 
-        List<Flight> flights = Arrays.asList(
-                new Flight(1, airports.get(0), airports.get(1), AircraftFactory.create("A350")),
-                new Flight(2, airports.get(1), airports.get(2), AircraftFactory.create("A380")),
-                new Flight(3, airports.get(2), airports.get(4), AircraftFactory.create("Embraer 190")),
-                new Flight(4, airports.get(3), airports.get(2), AircraftFactory.create("Antonov AN2")),
-                new Flight(5, airports.get(4), airports.get(2), AircraftFactory.create("H1")),
-                new Flight(6, airports.get(5), airports.get(7), AircraftFactory.create("HypaHype"))
+        List<FlightRoute> flightRoutes = Arrays.asList(
+                new FlightRoute(1, airports.get(0), airports.get(1)),
+                new FlightRoute(2, airports.get(1), airports.get(2)),
+                new FlightRoute(3, airports.get(2), airports.get(4)),
+                new FlightRoute(4, airports.get(3), airports.get(2)),
+                new FlightRoute(5, airports.get(4), airports.get(2)),
+                new FlightRoute(6, airports.get(5), airports.get(7))
         );
 
         @BeforeEach
         void initializeSchedule() throws ParseException {
             int i = 1;
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            for (Flight flight : flights) {
+            Aircraft aircraft = AircraftFactory.create("H1");
+            for (FlightRoute flightRoute : flightRoutes) {
                 Date departure = TestUtil.addDays(format.parse("2020-01-01"), i);
-                schedule.scheduleFlight(flight, departure);
+                ScheduledFlight scheduledFlight = new ScheduledFlight(flightRoute, aircraft, departure);
+                schedule.scheduleFlight(scheduledFlight);
                 i++;
             }
         }
@@ -150,65 +153,67 @@ public class ScheduleTest {
 
         @Nested
         @DisplayName("when a flight is removed")
-        class AFlightIsRemoved {
+        class AFlightRouteIsRemoved {
 
             @Test
             @DisplayName("then a flight should be removed")
             void thenAFlightShouldBeRemoved() {
-                schedule.removeFlight(flights.get(0));
+                schedule.removeFlight(flightRoutes.get(0));
                 assertEquals(5, schedule.getScheduledFlights().size());
             }
 
             @Test
             @DisplayName("then the flight should not be scheduled anymore")
             void thenTheCorrectFlightShouldBeRemoved() {
-                Flight flight = flights.get(3);
-                schedule.removeFlight(flight);
-                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(0).getNumber()));
-                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(1).getNumber()));
-                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(2).getNumber()));
-                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(4).getNumber()));
-                assertFalse(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(3).getNumber()));
+                FlightRoute flightRoute = flightRoutes.get(3);
+                schedule.removeFlight(flightRoute);
+                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlightRoute().getNumber() == flightRoutes.get(0).getNumber()));
+                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlightRoute().getNumber() == flightRoutes.get(1).getNumber()));
+                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlightRoute().getNumber() == flightRoutes.get(2).getNumber()));
+                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlightRoute().getNumber() == flightRoutes.get(4).getNumber()));
+                assertFalse(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlightRoute().getNumber() == flightRoutes.get(3).getNumber()));
             }
         }
 
         @Nested
         @DisplayName("when a flight is scheduled")
-        class AFlightIsScheduled {
+        class AFlightRouteIsScheduled {
 
             @Test
             @DisplayName("then the schedule should contain the added flight")
             void thenTheScheduleShouldContainTheAddedFlight() throws ParseException {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date departure = TestUtil.addDays(format.parse("2020-01-01"), 20);
-                schedule.scheduleFlight(flights.get(3), departure);
-                assertEquals(flights.get(3).getNumber(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getNumber());
-                assertEquals(flights.get(3).getArrival(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getArrival());
-                assertEquals(flights.get(3).getDeparture(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getDeparture());
+                Aircraft aircraft = AircraftFactory.create("H1");
+                ScheduledFlight scheduledFlight = new ScheduledFlight(flightRoutes.get(3), aircraft, departure);
+                schedule.scheduleFlight(scheduledFlight);
+                assertEquals(flightRoutes.get(3).getNumber(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getFlightRoute().getNumber());
+                assertEquals(flightRoutes.get(3).getArrival(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getFlightRoute().getArrival());
+                assertEquals(flightRoutes.get(3).getDeparture(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getFlightRoute().getDeparture());
                 assertEquals(departure, schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getDepartureTime());
             }
         }
 
         @Nested
         @DisplayName("when a flight is searched")
-        class AFlightIsSearched {
+        class AFlightRouteIsSearched {
 
             @Test
             @DisplayName("and the flight is scheduled then the flight should be returned")
             void thenTheFlightShouldBeReturned() throws ParseException {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date departure = TestUtil.addDays(format.parse("2020-01-01"), 2);
-                assertEquals(flights.get(1).getNumber(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getNumber());
-                assertEquals(flights.get(1).getArrival(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getArrival());
-                assertEquals(flights.get(1).getDeparture(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getDeparture());
-                assertEquals(departure, schedule.searchScheduledFlight(flights.get(1).getNumber()).getDepartureTime());
+                assertEquals(flightRoutes.get(1).getNumber(), schedule.searchScheduledFlight(flightRoutes.get(1).getNumber()).getFlightRoute().getNumber());
+                assertEquals(flightRoutes.get(1).getArrival(), schedule.searchScheduledFlight(flightRoutes.get(1).getNumber()).getFlightRoute().getArrival());
+                assertEquals(flightRoutes.get(1).getDeparture(), schedule.searchScheduledFlight(flightRoutes.get(1).getNumber()).getFlightRoute().getDeparture());
+                assertEquals(departure, schedule.searchScheduledFlight(flightRoutes.get(1).getNumber()).getDepartureTime());
             }
 
             @Test
             @DisplayName("and the flight is not scheduled then null should be returned")
             void thenNullShouldBeReturned() {
-                schedule.removeFlight(flights.get(0));
-                assertEquals(null, schedule.searchScheduledFlight(flights.get(0).getNumber()));
+                schedule.removeFlight(flightRoutes.get(0));
+                assertEquals(null, schedule.searchScheduledFlight(flightRoutes.get(0).getNumber()));
             }
         }
     }

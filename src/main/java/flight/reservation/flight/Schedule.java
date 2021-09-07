@@ -17,22 +17,19 @@ public class Schedule {
         return scheduledFlights;
     }
 
-    public void scheduleFlight(Flight flight, Date date) {
-        ScheduledFlight scheduledFlight = new ScheduledFlight(flight.getNumber(), flight.getDeparture(), flight.getArrival(), flight.getAircraft(), date);
+    public void scheduleFlight(ScheduledFlight scheduledFlight){
+        //ScheduledFlight scheduledFlight = new ScheduledFlight(flightRoute.getNumber(), flightRoute.getDeparture(), flightRoute.getArrival(), flightRoute.getAircraft(), date);
         scheduledFlights.add(scheduledFlight);
     }
 
-    public void removeFlight(Flight flight) {
-        List<ScheduledFlight> tbr = new ArrayList<>();
+    public void removeFlight(FlightRoute flightRoute) {
+        List<ScheduledFlight> toBeRemoved = new ArrayList<>();
         for (ScheduledFlight scheduledFlight : scheduledFlights) {
-            if (scheduledFlight == flight ||
-                    (flight.getArrival() == scheduledFlight.getArrival() &&
-                            flight.getDeparture() == scheduledFlight.getDeparture() &&
-                            flight.getNumber() == scheduledFlight.getNumber())) {
-                tbr.add(scheduledFlight);
+            if (scheduledFlight.getFlightRoute() == flightRoute) {
+                toBeRemoved.add(scheduledFlight);
             }
         }
-        scheduledFlights.removeAll(tbr);
+        scheduledFlights.removeAll(toBeRemoved);
     }
 
     public void removeScheduledFlight(ScheduledFlight flight) {
@@ -41,7 +38,7 @@ public class Schedule {
 
     public ScheduledFlight searchScheduledFlight(int flightNumber) {
         return scheduledFlights.stream()
-                .filter(f -> f.getNumber() == flightNumber)
+                .filter(f -> f.getFlightRoute().getNumber() == flightNumber)
                 .findFirst()
                 .orElse(null);
     }

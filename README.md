@@ -1,25 +1,25 @@
 # Flight Reservation Service
 
-This repository contains a simple application that provides a ticket reservation service for flights.
+This repository contains a simple application that provides a ticket reservation service for flightRoutes.
 It contains ...
   * ... entities for various types of air-travel e.g., 
-    descriptions of planes (``flight.reservation.plane.*``), 
-    airports (``flight.reservation.Airport``), and 
-    flights and schedule (``flight.reservation.flight.*``)
-  * ... customer (``flight.reservation.Customer``) and passenger (``flight.reservation.Passenger``) entities
+    descriptions of planes (``flightRoute.reservation.plane.*``), 
+    airports (``flightRoute.reservation.Airport``), and 
+    flightRoutes and schedule (``flightRoute.reservation.flightRoute.*``)
+  * ... customer (``flightRoute.reservation.Customer``) and passenger (``flightRoute.reservation.Passenger``) entities
   * ... classes for 
-    the reservation (``flight.reservation.order.*``)
-    and payment (``flight.reservation.payment.*``)
+    the reservation (``flightRoute.reservation.order.*``)
+    and payment (``flightRoute.reservation.payment.*``)
     of tickets
     
 The functionality currently includes ...
-  * ... creating flights from one airport to another with a certain aircraft 
-  * ... scheduling flights for a specific date and time.
-  * ... booking a reservation for a customer on a specific scheduled flight 
+  * ... creating flightRoutes from one airport to another with a certain aircraft 
+  * ... scheduling flightRoutes for a specific date and time.
+  * ... booking a reservation for a customer on a specific scheduled flightRoute 
   * ... processing the payment (by credit card or PayPal) and closing/finalizing the order.
 
 There is no interface for the service yet. Instead, test were written for ...
-  * ... scheduling flights (on unit level)
+  * ... scheduling flightRoutes (on unit level)
   * ... booking scenarios (on acceptance level)
 
 ### Background story
@@ -56,8 +56,8 @@ To run the application, the following should be installed:
 In the command line run the following: 
 
 ```
-git clone https://github.com/fortiss-cce/flight-reservation.git
-cd flight-reservation
+git clone https://github.com/fortiss-cce/flightRoute-reservation.git
+cd flightRoute-reservation
 ```
 
 This project has no interface yet.

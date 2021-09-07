@@ -1,6 +1,6 @@
 import flight.reservation.Airport;
+import flight.reservation.flight.FlightRoute;
 import flight.reservation.flight.Schedule;
-import flight.reservation.flight.Flight;
 import flight.reservation.plane.Aircraft;
 import flight.reservation.plane.AircraftFactory;
 
@@ -19,22 +19,13 @@ public class Runner {
             new Airport("Chengdu Shuangliu International Airport", "CTU", "Shuangliu-Wuhou, Chengdu, Sichuan")
     );
 
-    static List<Aircraft> aircrafts = Arrays.asList(
-            AircraftFactory.create("A380"),
-            AircraftFactory.create("A350"),
-            AircraftFactory.create("Embraer 190"),
-            AircraftFactory.create("Antonov AN2"),
-            AircraftFactory.create("H1"),
-            AircraftFactory.create("HypaHype")
-    );
-
-    static List<Flight> flights = Arrays.asList(
-            new Flight(1, airports.get(0), airports.get(1), aircrafts.get(0)),
-            new Flight(2, airports.get(1), airports.get(2), aircrafts.get(1)),
-            new Flight(3, airports.get(2), airports.get(4), aircrafts.get(2)),
-            new Flight(4, airports.get(3), airports.get(2), aircrafts.get(3)),
-            new Flight(5, airports.get(4), airports.get(2), aircrafts.get(4)),
-            new Flight(6, airports.get(5), airports.get(7), aircrafts.get(5))
+    static List<FlightRoute> flightRoutes = Arrays.asList(
+            new FlightRoute(1, airports.get(0), airports.get(1)),
+            new FlightRoute(2, airports.get(1), airports.get(2)),
+            new FlightRoute(3, airports.get(2), airports.get(4)),
+            new FlightRoute(4, airports.get(3), airports.get(2)),
+            new FlightRoute(5, airports.get(4), airports.get(2)),
+            new FlightRoute(6, airports.get(5), airports.get(7))
     );
 
     static Schedule schedule;
