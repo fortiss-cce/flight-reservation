@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FlightOrder extends Order {
     private final List<ScheduledFlight> flights;
-    static List<String> noFlyList = Arrays.asList("Peter", "Johannes");
+    static List<String> noFlyList = Arrays.asList(); //you get another chance ;)
 
     public FlightOrder(List<ScheduledFlight> flights) {
         this.flights = flights;
