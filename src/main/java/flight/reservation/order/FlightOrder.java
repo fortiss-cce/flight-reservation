@@ -46,7 +46,7 @@ public class FlightOrder extends Order {
     }
 
     public boolean processOrderWithCreditCard(CreditCard creditCard) throws IllegalStateException {
-        if (isClosed()) {
+        if (this.isClosed()) {
             // Payment is already proceeded
             return true;
         }
@@ -66,7 +66,7 @@ public class FlightOrder extends Order {
     }
 
     public boolean processOrderWithPayPal(String email, String password) throws IllegalStateException {
-        if (isClosed()) {
+        if (this.isClosed()) {
             // Payment is already proceeded
             return true;
         }
@@ -83,8 +83,8 @@ public class FlightOrder extends Order {
 
     public boolean payWithCreditCard(CreditCard card, double amount) throws IllegalStateException {
         if (cardIsPresentAndValid(card)) {
-            System.out.println("Paying " + getPrice() + " using Credit Card.");
-            double remainingAmount = card.getAmount() - getPrice();
+            System.out.println("Paying " + this.getPrice() + " using Credit Card.");
+            double remainingAmount = card.getAmount() - this.getPrice();
             if (remainingAmount < 0) {
                 System.out.printf("Card limit reached - Balance: %f%n", remainingAmount);
                 throw new IllegalStateException("Card limit reached");
@@ -98,7 +98,7 @@ public class FlightOrder extends Order {
 
     public boolean payWithPayPal(String email, String password, double amount) throws IllegalStateException {
         if (email.equals(Paypal.DATA_BASE.get(password))) {
-            System.out.println("Paying " + getPrice() + " using PayPal.");
+            System.out.println("Paying " + this.getPrice() + " using PayPal.");
             return true;
         } else {
             return false;

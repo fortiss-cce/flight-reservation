@@ -87,7 +87,7 @@ public class ScheduleTest {
             @DisplayName("then the correct flight should be scheduled")
             void thenScheduleShouldContainCorrectElement() {
                 ScheduledFlight scheduledFlight = schedule.getScheduledFlights().get(0);
-                assertEquals(flight.getNumber(), scheduledFlight.getNumber());
+                assertEquals(flight.getNumber(), scheduledFlight.getFlight().getNumber());
                 assertEquals(departure, scheduledFlight.getDepartureTime());
             }
 
@@ -164,11 +164,11 @@ public class ScheduleTest {
             void thenTheCorrectFlightShouldBeRemoved() {
                 Flight flight = flights.get(3);
                 schedule.removeFlight(flight);
-                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(0).getNumber()));
-                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(1).getNumber()));
-                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(2).getNumber()));
-                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(4).getNumber()));
-                assertFalse(schedule.getScheduledFlights().stream().anyMatch(o -> o.getNumber() == flights.get(3).getNumber()));
+                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlight().getNumber() == flights.get(0).getNumber()));
+                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlight().getNumber() == flights.get(1).getNumber()));
+                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlight().getNumber() == flights.get(2).getNumber()));
+                assertTrue(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlight().getNumber() == flights.get(4).getNumber()));
+                assertFalse(schedule.getScheduledFlights().stream().anyMatch(o -> o.getFlight().getNumber() == flights.get(3).getNumber()));
             }
         }
 
@@ -182,9 +182,9 @@ public class ScheduleTest {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date departure = TestUtil.addDays(format.parse("2020-01-01"), 20);
                 schedule.scheduleFlight(flights.get(3), departure);
-                assertEquals(flights.get(3).getNumber(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getNumber());
-                assertEquals(flights.get(3).getArrival(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getArrival());
-                assertEquals(flights.get(3).getDeparture(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getDeparture());
+                assertEquals(flights.get(3).getNumber(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getFlight().getNumber());
+                assertEquals(flights.get(3).getArrival(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getFlight().getArrival());
+                assertEquals(flights.get(3).getDeparture(), schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getFlight().getDeparture());
                 assertEquals(departure, schedule.getScheduledFlights().get(schedule.getScheduledFlights().size() - 1).getDepartureTime());
             }
         }
@@ -198,9 +198,9 @@ public class ScheduleTest {
             void thenTheFlightShouldBeReturned() throws ParseException {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date departure = TestUtil.addDays(format.parse("2020-01-01"), 2);
-                assertEquals(flights.get(1).getNumber(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getNumber());
-                assertEquals(flights.get(1).getArrival(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getArrival());
-                assertEquals(flights.get(1).getDeparture(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getDeparture());
+                assertEquals(flights.get(1).getNumber(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getFlight().getNumber());
+                assertEquals(flights.get(1).getArrival(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getFlight().getArrival());
+                assertEquals(flights.get(1).getDeparture(), schedule.searchScheduledFlight(flights.get(1).getNumber()).getFlight().getDeparture());
                 assertEquals(departure, schedule.searchScheduledFlight(flights.get(1).getNumber()).getDepartureTime());
             }
 
