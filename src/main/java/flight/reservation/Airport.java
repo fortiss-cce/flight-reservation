@@ -16,8 +16,9 @@ public class Airport {
         this.name = name;
         this.code = code;
         this.location = location;
-        this.allowedAircrafts = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"};
+        this.allowedAircrafts = new String[]{"A380", "A350", "Embraer 190", "Antonov AN2", "H1", "H2", "HypaHype"};  //Maybe change to aicrafttype?
     }
+
 
     public Airport(String name, String code, String location, String[] allowedAircrafts) {
         this.name = name;
