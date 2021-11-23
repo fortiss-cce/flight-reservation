@@ -2,6 +2,7 @@ package flight.reservation.flight;
 
 import flight.reservation.Airport;
 import flight.reservation.Passenger;
+import flight.reservation.plane.Aircraft;
 import flight.reservation.plane.Helicopter;
 import flight.reservation.plane.PassengerDrone;
 import flight.reservation.plane.PassengerPlane;
@@ -51,7 +52,7 @@ public class ScheduledFlight extends Flight {
     }
 
     public int getCapacity() throws NoSuchFieldException {
-        if (this.aircraft instanceof PassengerPlane) {
+        /*if (this.aircraft instanceof PassengerPlane) {
             return ((PassengerPlane) this.aircraft).passengerCapacity;
         }
         if (this.aircraft instanceof Helicopter) {
@@ -59,8 +60,10 @@ public class ScheduledFlight extends Flight {
         }
         if (this.aircraft instanceof PassengerDrone) {
             return 4;
-        }
-        throw new NoSuchFieldException("this aircraft has no information about its capacity");
+        }*/
+
+        return ((Aircraft) this.aircraft).passengerCapacity;
+        //throw new NoSuchFieldException("this aircraft has no information about its capacity");
     }
 
     public int getAvailableCapacity() throws NoSuchFieldException {
