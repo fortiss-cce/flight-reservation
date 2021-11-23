@@ -11,8 +11,8 @@ public class Order {
     private final UUID id;
     private double price;
     private boolean isClosed = false;
-    private Customer customer;
-    private List<Passenger> passengers;
+    protected Customer customer;
+    protected List<Passenger> passengers;
 
     public Order() {
         this.id = UUID.randomUUID();

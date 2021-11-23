@@ -25,13 +25,13 @@ public class FlightOrder extends Order {
         return flights;
     }
 
-    private boolean isOrderValid(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
+    public boolean isValid() {
         boolean valid = true;
         valid = valid && !noFlyList.contains(customer.getName());
-        valid = valid && passengerNames.stream().noneMatch(passenger -> noFlyList.contains(passenger));
+        valid = valid && passengers.stream().noneMatch(passenger -> noFlyList.contains(passenger.getName()));
         valid = valid && flights.stream().allMatch(scheduledFlight -> {
             try {
-                return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
+                return scheduledFlight.getAvailableCapacity() >= passengers.size();
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
                 return false;
