@@ -1,6 +1,6 @@
 package flight.reservation.plane;
 
-public class PassengerDrone {
+public class PassengerDrone extends Plane{
     private final String model;
 
     public PassengerDrone(String model) {
