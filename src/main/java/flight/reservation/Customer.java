@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// TODO: introduce passenger for name? or Person as parent class
 public class Customer {
 
     private String email;
@@ -42,12 +43,7 @@ public class Customer {
         valid = valid && !FlightOrder.getNoFlyList().contains(this.getName());
         valid = valid && passengerNames.stream().noneMatch(passenger -> FlightOrder.getNoFlyList().contains(passenger));
         valid = valid && flights.stream().allMatch(scheduledFlight -> {
-            try {
-                return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-                return false;
-            }
+            return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
         });
         return valid;
     }
@@ -77,3 +73,4 @@ public class Customer {
     }
 
 }
+
