@@ -1,3 +1,8 @@
+#TODO
+- super class for aircrafts
+- separate payment method from order (flightorder), create payment super class
+- ScheduledFlight overload constructor with flight parameter
+
 # Flight Reservation Service
 
 This repository contains a simple application that provides a ticket reservation service for flights.
