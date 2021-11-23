@@ -5,6 +5,10 @@ public class Aircraft {
     public int passengerCapacity;
     public int crewCapacity;
 
+    public Aircraft(String model) {
+        this.model = model;
+    }
+
     /*public String getModel() {
         return model;
     }

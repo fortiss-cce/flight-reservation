@@ -6,9 +6,9 @@ public class Helicopter extends Aircraft {
     public static final String MODEL_H2 = "H2";
 
     public Helicopter(String model) {
-        super();
+        super(model);
 
-        this.model = model;
+        crewCapacity = 2;
         switch(model) {
             case MODEL_H1:
                 passengerCapacity = 4;

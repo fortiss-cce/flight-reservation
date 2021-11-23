@@ -8,9 +8,8 @@ public class PassengerPlane extends Aircraft {
     public static final String MODEL_ANTONOV_AN2 = "Antonov AN2";
 
     public PassengerPlane(String model) {
-        super();
+        super(model);
 
-        this.model = model;
         switch (model) {
             case MODEL_A380:
                 passengerCapacity = 500;
