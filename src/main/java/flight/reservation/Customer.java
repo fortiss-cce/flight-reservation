@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Customer {
+// TODO: introduce passenger for name? or Person as parent class
+public class Customer extends Person {
 
     private String email;
-    private String name;
     private List<Order> orders;
 
     public Customer(String name, String email) {
-        this.name = name;
+        super(name);
         this.email = email;
         this.orders = new ArrayList<>();
     }
@@ -42,12 +42,7 @@ public class Customer {
         valid = valid && !FlightOrder.getNoFlyList().contains(this.getName());
         valid = valid && passengerNames.stream().noneMatch(passenger -> FlightOrder.getNoFlyList().contains(passenger));
         valid = valid && flights.stream().allMatch(scheduledFlight -> {
-            try {
-                return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-                return false;
-            }
+            return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
         });
         return valid;
     }
@@ -58,10 +53,6 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
@@ -77,3 +68,4 @@ public class Customer {
     }
 
 }
+

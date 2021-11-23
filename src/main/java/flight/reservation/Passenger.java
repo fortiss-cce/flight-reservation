@@ -1,15 +1,9 @@
 package flight.reservation;
 
-public class Passenger {
+import javax.xml.namespace.QName;
 
-    private final String name;
-
+public class Passenger extends Person {
     public Passenger(String name) {
-        this.name = name;
+        super(name);
     }
-
-    public String getName() {
-        return name;
-    }
-
 }
