@@ -1,10 +1,10 @@
 package flight.reservation.plane;
 
-public class PassengerPlane {
+public class PassengerPlane extends Plane {
 
-    public String model;
-    public int passengerCapacity;
-    public int crewCapacity;
+  //  public String model;
+  //  public int passengerCapacity;
+  //  public int crewCapacity;
 
     public PassengerPlane(String model) {
         this.model = model;

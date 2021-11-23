@@ -5,6 +5,7 @@ import flight.reservation.Passenger;
 import flight.reservation.plane.Helicopter;
 import flight.reservation.plane.PassengerDrone;
 import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.Plane;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +30,7 @@ public class ScheduledFlight extends Flight {
         this.currentPrice = currentPrice;
     }
 
+    /**
     public int getCrewMemberCapacity() throws NoSuchFieldException {
         if (this.aircraft instanceof PassengerPlane) {
             return ((PassengerPlane) this.aircraft).crewCapacity;
@@ -41,6 +43,14 @@ public class ScheduledFlight extends Flight {
         }
         throw new NoSuchFieldException("this aircraft has no information about its crew capacity");
     }
+*/
+    public int getCrewMemberCapacity()
+    {
+        return ((Plane) this.aircraft).getCrewMemberCapacity();
+    }
+
+
+
 
     public void addPassengers(List<Passenger> passengers) {
         this.passengers.addAll(passengers);
@@ -50,6 +60,7 @@ public class ScheduledFlight extends Flight {
         this.passengers.removeAll(passengers);
     }
 
+    /**
     public int getCapacity() throws NoSuchFieldException {
         if (this.aircraft instanceof PassengerPlane) {
             return ((PassengerPlane) this.aircraft).passengerCapacity;
@@ -62,9 +73,13 @@ public class ScheduledFlight extends Flight {
         }
         throw new NoSuchFieldException("this aircraft has no information about its capacity");
     }
+*/
 
+    public int getCapacity() {
+        return ((Plane) this.aircraft).getPassengerCapacity();
+    }
     public int getAvailableCapacity() throws NoSuchFieldException {
-        return this.getCapacity() - this.passengers.size();
+        return ((Plane)this.aircraft).getPassengerCapacity() - this.passengers.size();
     }
 
     public Date getDepartureTime() {
