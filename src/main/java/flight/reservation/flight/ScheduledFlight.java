@@ -65,7 +65,7 @@ public class ScheduledFlight extends Flight {
     }
 
     public int getAvailableCapacity() throws NoSuchFieldException {
-        return this.getCapacity() - this.passengers.size();
+        return this.aircraft.getPassengerCapacity() - this.passengers.size();
     }
 
     public Date getDepartureTime() {

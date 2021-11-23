@@ -96,7 +96,7 @@ public class ScenarioTest {
                     ScheduledFlight scheduledFlight = schedule.searchScheduledFlight(flight.getNumber());
                     assertThrows(IllegalStateException.class, () -> customer.createOrder(Arrays.asList("Amanda", "Max"), Arrays.asList(scheduledFlight), 180));
                     assertEquals(3, scheduledFlight.getPassengers().size());
-                    assertEquals(4, scheduledFlight.getCapacity());
+                    assertEquals(4, scheduledFlight.getAircraft().getPassengerCapacity());
                     assertEquals(1, scheduledFlight.getAvailableCapacity());
                     assertTrue(scheduledFlight.getPassengers().stream().noneMatch(passenger -> passenger.getName().equals("Max")));
                     assertTrue(scheduledFlight.getPassengers().stream().noneMatch(passenger -> passenger.getName().equals("Amanda")));
@@ -113,7 +113,7 @@ public class ScenarioTest {
                     FlightOrder order = customer.createOrder(Arrays.asList("Amanda", "Max"), Arrays.asList(scheduledFlight), 180);
 
                     assertEquals(2, scheduledFlight.getPassengers().size());
-                    assertEquals(4, scheduledFlight.getCapacity());
+                    assertEquals(4, scheduledFlight.getAircraft().getPassengerCapacity());
                     assertEquals(2, scheduledFlight.getAvailableCapacity());
                     assertTrue(scheduledFlight.getPassengers().stream().anyMatch(passenger -> passenger.getName().equals("Max")));
                     assertTrue(scheduledFlight.getPassengers().stream().anyMatch(passenger -> passenger.getName().equals("Amanda")));
@@ -207,7 +207,7 @@ public class ScenarioTest {
                 assertEquals(900, creditCard.getAmount());
                 assertEquals(1, scheduledFlight.getPassengers().size());
                 assertEquals("Max", scheduledFlight.getPassengers().get(0).getName());
-                assertEquals(500, scheduledFlight.getCapacity());
+                assertEquals(500, scheduledFlight.getAircraft().getPassengerCapacity());
                 assertEquals(499, scheduledFlight.getAvailableCapacity());
 
             }
