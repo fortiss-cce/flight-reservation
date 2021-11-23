@@ -1,7 +1,6 @@
 package flight.reservation.plane;
 
-public class PassengerDrone {
-    private final String model;
+public class PassengerDrone extends IdentifiedFlightObject{
 
     public PassengerDrone(String model) {
         if (model.equals("HypaHype")) {

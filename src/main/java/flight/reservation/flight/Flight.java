@@ -32,13 +32,13 @@ public class Flight {
         return Arrays.stream(airport.getAllowedAircrafts()).anyMatch(x -> {
             String model;
             if (this.aircraft instanceof PassengerPlane) {
-                model = ((PassengerPlane) this.aircraft).model;
+                model = ((PassengerPlane) this.aircraft).getModel();
             } else if (this.aircraft instanceof Helicopter) {
                 model = ((Helicopter) this.aircraft).getModel();
             } else if (this.aircraft instanceof PassengerDrone) {
                 model = "HypaHype";
             } else {
-                throw new IllegalArgumentException(String.format("Aircraft is not recognized"));
+                throw new IllegalArgumentException("Aircraft is not recognized");
             }
             return x.equals(model);
         });

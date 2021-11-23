@@ -1,8 +1,6 @@
 package flight.reservation.plane;
 
-public class Helicopter {
-    private final String model;
-    private final int passengerCapacity;
+public class Helicopter extends IdentifiedFlightObject{
 
     public Helicopter(String model) {
         this.model = model;
@@ -13,13 +11,5 @@ public class Helicopter {
         } else {
             throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
         }
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getPassengerCapacity() {
-        return passengerCapacity;
     }
 }
