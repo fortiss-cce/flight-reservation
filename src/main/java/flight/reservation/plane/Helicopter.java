@@ -4,6 +4,8 @@ public class Helicopter extends IdentifiedFlightObject{
 
     public Helicopter(String model) {
         this.model = model;
+        this.crewCapacity = 2;
+
         if (model.equals("H1")) {
             passengerCapacity = 4;
         } else if (model.equals("H2")) {
