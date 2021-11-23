@@ -2,6 +2,7 @@ package flight.reservation.flight;
 
 import flight.reservation.Airport;
 import flight.reservation.plane.Helicopter;
+import flight.reservation.plane.IdentifiedFlightObject;
 import flight.reservation.plane.PassengerDrone;
 import flight.reservation.plane.PassengerPlane;
 
@@ -12,9 +13,9 @@ public class Flight {
     private int number;
     private Airport departure;
     private Airport arrival;
-    protected Object aircraft;
+    protected IdentifiedFlightObject aircraft;
 
-    public Flight(int number, Airport departure, Airport arrival, Object aircraft) throws IllegalArgumentException {
+    public Flight(int number, Airport departure, Airport arrival, IdentifiedFlightObject aircraft) throws IllegalArgumentException {
         this.number = number;
         this.departure = departure;
         this.arrival = arrival;
@@ -32,19 +33,19 @@ public class Flight {
         return Arrays.stream(airport.getAllowedAircrafts()).anyMatch(x -> {
             String model;
             if (this.aircraft instanceof PassengerPlane) {
-                model = ((PassengerPlane) this.aircraft).model;
+                model = ((PassengerPlane) this.aircraft).getModel();
             } else if (this.aircraft instanceof Helicopter) {
                 model = ((Helicopter) this.aircraft).getModel();
             } else if (this.aircraft instanceof PassengerDrone) {
-                model = "HypaHype";
+                model = ((PassengerDrone) this.aircraft).getModel();
             } else {
-                throw new IllegalArgumentException(String.format("Aircraft is not recognized"));
+                throw new IllegalArgumentException("Aircraft is not recognized");
             }
             return x.equals(model);
         });
     }
 
-    public Object getAircraft() {
+    public IdentifiedFlightObject getAircraft() {
         return aircraft;
     }
 
