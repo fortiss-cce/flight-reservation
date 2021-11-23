@@ -1,9 +1,10 @@
 package flight.reservation.plane;
 
-public class PassengerDrone {
+public class PassengerDrone extends Aircraft {
     private final String model;
 
     public PassengerDrone(String model) {
+        super(0, 4, model);
         if (model.equals("HypaHype")) {
             this.model = model;
         } else {
