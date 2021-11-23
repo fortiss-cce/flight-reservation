@@ -17,8 +17,8 @@ public class ScheduledFlight extends Flight {
     private final Date departureTime;
     private double currentPrice = 100;
 
-    public ScheduledFlight(int number, Airport departure, Airport arrival, Vehicle aircraft, Date departureTime) {
-        super(number, departure, arrival, aircraft);
+    public ScheduledFlight(Flight flight, Date departureTime) {
+        super(flight.getNumber(), flight.getDeparture(), flight.getArrival(), flight.getAircraft());
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
     }
