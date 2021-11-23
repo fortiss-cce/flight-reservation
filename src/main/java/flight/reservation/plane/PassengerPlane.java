@@ -2,10 +2,10 @@ package flight.reservation.plane;
 
 public class PassengerPlane extends Aircraft {
 
-    static final String MODEL_A380 = "A380";
-    static final String MODEL_A350 = "A350";
-    static final String MODEL_EMBRAER_190 = "Embraer 190";
-    static final String MODEL_ANTONOV_AN2 = "Antonov AN2";
+    public static final String MODEL_A380 = "A380";
+    public static final String MODEL_A350 = "A350";
+    public static final String MODEL_EMBRAER_190 = "Embraer 190";
+    public static final String MODEL_ANTONOV_AN2 = "Antonov AN2";
 
     public PassengerPlane(String model) {
         super();

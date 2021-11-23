@@ -2,8 +2,8 @@ package flight.reservation.plane;
 
 public class Helicopter extends Aircraft {
 
-    static final String MODEL_H1 = "H1";
-    static final String MODEL_H2 = "H2";
+    public static final String MODEL_H1 = "H1";
+    public static final String MODEL_H2 = "H2";
 
     public Helicopter(String model) {
         super();

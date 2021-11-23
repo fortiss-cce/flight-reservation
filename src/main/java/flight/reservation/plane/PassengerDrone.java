@@ -2,7 +2,7 @@ package flight.reservation.plane;
 
 public class PassengerDrone extends Aircraft {
 
-    static final String MODEL_HYPA_HYPE = "HypaHype";
+    public static final String MODEL_HYPA_HYPE = "HypaHype";
 
     public PassengerDrone(String model) {
         super();

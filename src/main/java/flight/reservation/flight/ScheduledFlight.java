@@ -51,7 +51,7 @@ public class ScheduledFlight extends Flight {
         this.passengers.removeAll(passengers);
     }
 
-    public int getCapacity() throws NoSuchFieldException {
+    public int getCapacity() /*throws NoSuchFieldException*/ {
         /*if (this.aircraft instanceof PassengerPlane) {
             return ((PassengerPlane) this.aircraft).passengerCapacity;
         }
